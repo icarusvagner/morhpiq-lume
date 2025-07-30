@@ -1,6 +1,7 @@
-use crate::gui::views::RunningView;
+use crate::gui::{types::login::LoginMessage, views::RunningView};
 
 #[derive(Clone, Debug)]
 pub enum Message {
     ChangeRunningPage(RunningView),
+    LoginMessage(LoginMessage),
 }

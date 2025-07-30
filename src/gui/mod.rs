@@ -1,3 +1,5 @@
+pub mod components;
 pub mod morphiq;
-pub mod views;
+pub mod styles;
 pub mod types;
+pub mod views;

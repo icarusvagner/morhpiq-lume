@@ -11,7 +11,12 @@ documentation = "https://github.com/icarusvagner/morhpiq-lume/wiki"
 license = "MIT OR Apache-2.0"
 keywords = ["gui", "hrmo", "desktop"]
 include = [
-  "/src/**/*.rs"
+  "/src/**/*.rs",
+  "/assets/fonts/Raleway/*.ttf",
+  "/assets/fonts/Orbitron/*.ttf",
+  "/assets/logos/icons/full/icon.png",
+  "/assets/logos/icons/raw/icon.png",
+  "/assets/fonts/icons/font/fontello.ttf",
 ]
 
 #================================================================================
