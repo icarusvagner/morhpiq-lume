@@ -16,7 +16,7 @@ include = [
   "/assets/fonts/Orbitron/*.ttf",
   "/assets/logos/icons/full/icon.png",
   "/assets/logos/icons/raw/icon.png",
-  "/assets/fonts/icons/font/fontello.ttf",
+  "/assets/fonts/icons/font/*.ttf",
 ]
 
 #================================================================================

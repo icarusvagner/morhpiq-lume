@@ -1,130 +1,136 @@
 {
-  "name": "",
-  "css_prefix_text": "icon-",
+  "name": "iconsformorphiqlume",
+  "css_prefix_text": "morphiq-icon-",
   "css_use_suffix": false,
   "hinting": true,
   "units_per_em": 1000,
   "ascent": 850,
   "glyphs": [
     {
-      "uid": "d139ce97a43aedd333fa40f776328c3c",
-      "css": "user-delete",
-      "code": 59393,
-      "src": "typicons"
+      "uid": "8da3ac534210aae9c0f0e13804c1df97",
+      "css": "cancel",
+      "code": 97,
+      "src": "websymbols"
     },
     {
-      "uid": "076f940ac56adee91dd43d6fd77dd0cf",
-      "css": "user-add",
-      "code": 59392,
-      "src": "typicons"
+      "uid": "fb1c59faa93eb6e2248c2456625b08a2",
+      "css": "user-times",
+      "code": 98,
+      "src": "fontawesome"
     },
     {
-      "uid": "x8m4z7b33cv1h2s784tjlam56uq40wtd",
+      "uid": "1bafeeb1808a5fe24484c7890096901a",
+      "css": "user-plus",
+      "code": 99,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "31972e4e9d080eaa796290349ae6c1fd",
       "css": "users",
-      "code": 59394,
-      "src": "typicons"
+      "code": 100,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "8b80d36d4ef43889db10bc1f0dc9a862",
+      "css": "user",
+      "code": 101,
+      "src": "fontawesome"
     },
     {
       "uid": "4c2a3128819fef9548d6f0d38a5e291a",
       "css": "calendar",
-      "code": 59395,
+      "code": 102,
       "src": "typicons"
     },
     {
       "uid": "9dd9e835aebe1060ba7190ad2b2ed951",
       "css": "search",
-      "code": 59396,
+      "code": 103,
       "src": "fontawesome"
     },
     {
       "uid": "0d20938846444af8deb1920dc85a29fb",
       "css": "logout",
-      "code": 59397,
+      "code": 104,
       "src": "fontawesome"
     },
     {
       "uid": "b95cfc96d48a72dd665e0ab109880b5e",
       "css": "clipboard",
-      "code": 59398,
+      "code": 105,
       "src": "entypo"
     },
     {
       "uid": "e99461abfef3923546da8d745372c995",
       "css": "cog",
-      "code": 59399,
+      "code": 106,
       "src": "fontawesome"
     },
     {
-      "uid": "ccddff8e8670dcd130e3cb55fdfc2fd0",
-      "css": "down-open",
-      "code": 59401,
+      "uid": "98687378abd1faf8f6af97c254eb6cd6",
+      "css": "cog-alt",
+      "code": 107,
       "src": "fontawesome"
     },
     {
-      "uid": "399ef63b1e23ab1b761dfbb5591fa4da",
-      "css": "right-open",
-      "code": 59403,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "d870630ff8f81e6de3958ecaeac532f2",
-      "css": "left-open-1",
-      "code": 59402,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "fe6697b391355dec12f3d86d6d490397",
+      "uid": "440e148d0e21100118eae7036bcd2067",
       "css": "up-open",
-      "code": 59400,
-      "src": "fontawesome"
+      "code": 108,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "37910a1398001a5ccb541cb2a253a2c7",
+      "css": "right-open",
+      "code": 109,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "b714be5a812a474811604f700dfc87ce",
+      "css": "left-open",
+      "code": 110,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "d9be617b7f2fe7843118ca2d3a1b8cca",
+      "css": "down-open",
+      "code": 111,
+      "src": "mfglabs"
     },
     {
       "uid": "dbd39eb5a1d67beb54cfcb535e840e0f",
       "css": "plus",
-      "code": 59404,
+      "code": 112,
       "src": "iconic"
     },
     {
       "uid": "76f961b11f65300838a5a78856aca30f",
       "css": "th-large",
-      "code": 59405,
+      "code": 113,
       "src": "elusive"
     },
     {
       "uid": "27b13eff5eb0ca15e01a6e65ffe6eeec",
       "css": "sort-alt-down",
-      "code": 61793,
+      "code": 114,
       "src": "fontawesome"
     },
     {
       "uid": "0cd2582b8c93719d066ee0affd02ac78",
       "css": "sort-alt-up",
-      "code": 61792,
+      "code": 115,
       "src": "fontawesome"
     },
     {
       "uid": "4fc9b8c122d1b5ca3df42a104a655e8b",
       "css": "language",
-      "code": 61867,
+      "code": 116,
       "src": "fontawesome"
     },
     {
-      "uid": "4109c474ff99cad28fd5a2c38af2ec6f",
-      "css": "filter",
-      "code": 61616,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "c08a1cde48d96cba21d8c05fa7d7feb1",
-      "css": "doc-text-inv",
-      "code": 61788,
-      "src": "fontawesome"
-    },
-    {
-      "uid": "499b745a2e2485bdd059c3a53d048e5f",
-      "css": "cancel",
-      "code": 59406,
-      "src": "elusive"
+      "uid": "ddecf5ad7935e3fb1b70dac6ed00d06a",
+      "css": "language-1",
+      "code": 117,
+      "src": "entypo"
     }
   ]
 }

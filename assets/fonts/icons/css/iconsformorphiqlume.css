@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'iconsformorphiqlume';
+  src: url('../font/iconsformorphiqlume.eot?61152743');
+  src: url('../font/iconsformorphiqlume.eot?61152743#iefix') format('embedded-opentype'),
+       url('../font/iconsformorphiqlume.woff2?61152743') format('woff2'),
+       url('../font/iconsformorphiqlume.woff?61152743') format('woff'),
+       url('../font/iconsformorphiqlume.ttf?61152743') format('truetype'),
+       url('../font/iconsformorphiqlume.svg?61152743#iconsformorphiqlume') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'iconsformorphiqlume';
+    src: url('../font/iconsformorphiqlume.svg?61152743#iconsformorphiqlume') format('svg');
+  }
+}
+*/
+[class^="morphiq-icon-"]:before, [class*=" morphiq-icon-"]:before {
+  font-family: "iconsformorphiqlume";
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.morphiq-icon-cancel:before { content: '\61'; } /* 'a' */
+.morphiq-icon-user-times:before { content: '\62'; } /* 'b' */
+.morphiq-icon-user-plus:before { content: '\63'; } /* 'c' */
+.morphiq-icon-users:before { content: '\64'; } /* 'd' */
+.morphiq-icon-user:before { content: '\65'; } /* 'e' */
+.morphiq-icon-calendar:before { content: '\66'; } /* 'f' */
+.morphiq-icon-search:before { content: '\67'; } /* 'g' */
+.morphiq-icon-logout:before { content: '\68'; } /* 'h' */
+.morphiq-icon-clipboard:before { content: '\69'; } /* 'i' */
+.morphiq-icon-cog:before { content: '\6a'; } /* 'j' */
+.morphiq-icon-cog-alt:before { content: '\6b'; } /* 'k' */
+.morphiq-icon-up-open:before { content: '\6c'; } /* 'l' */
+.morphiq-icon-right-open:before { content: '\6d'; } /* 'm' */
+.morphiq-icon-left-open:before { content: '\6e'; } /* 'n' */
+.morphiq-icon-down-open:before { content: '\6f'; } /* 'o' */
+.morphiq-icon-plus:before { content: '\70'; } /* 'p' */
+.morphiq-icon-th-large:before { content: '\71'; } /* 'q' */
+.morphiq-icon-sort-alt-down:before { content: '\72'; } /* 'r' */
+.morphiq-icon-sort-alt-up:before { content: '\73'; } /* 's' */
+.morphiq-icon-language:before { content: '\74'; } /* 't' */
+.morphiq-icon-language-1:before { content: '\75'; } /* 'u' */

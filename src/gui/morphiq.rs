@@ -15,7 +15,8 @@ pub struct Morphiq {
     pub login_field: LoginField,
 }
 
-pub const ICON_FONT_FAMILY_NAME: &str = "Icons for Morphiq";
+pub const ICON_FONT_FAMILY_NAME: &str = "iconsformorphiqlume";
+pub const FONT_FAMILY_NAME: &str = "Raleway";
 
 impl Morphiq {
     pub fn theme(&self) -> Theme {
@@ -59,8 +60,6 @@ impl Morphiq {
         };
 
         container(content)
-            .align_x(Alignment::Center)
-            .align_y(Alignment::Center)
             .width(Length::Fill)
             .height(Length::Fill)
             .into()

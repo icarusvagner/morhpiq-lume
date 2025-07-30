@@ -4,7 +4,7 @@ use iced::{
 };
 
 use crate::gui::{
-    components::header::header_view,
+    components::types::button::{button_style, ButtonType},
     morphiq::Morphiq,
     types::{login::LoginMessage, message::Message},
 };
@@ -43,16 +43,16 @@ pub fn login_view(morphiq: &Morphiq) -> Container<'_, Message> {
         .spacing(15);
 
     let content = Column::new()
-        .push(header_view(morphiq))
         .push(username_input)
         .push(password_input)
         .push(
             button(
                 text("Submit")
-                    .size(18)
+                    .size(20)
                     .align_x(Alignment::Center)
                     .align_y(Alignment::Center),
             )
+            .style(button_style(&ButtonType::Primary))
             .width(Length::Fixed(450.0))
             .height(45.0)
             .on_press(Message::LoginMessage(LoginMessage::LoginSubmit)),
