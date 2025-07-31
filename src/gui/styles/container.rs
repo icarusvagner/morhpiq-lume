@@ -16,25 +16,28 @@ pub enum ContainerStyle {
 }
 
 impl ContainerStyle {
-    fn appearance(&self, theme: &Theme) -> Style {
-        Style {
+    pub fn appearance(&self) -> impl Fn(&Theme) -> Style {
+        move |_t| Style {
             text_color: Some(Colors::Night.get()),
             background: Some(match self {
                 ContainerStyle::Standard => Background::Color(Colors::AntiFlashWhite.get()),
                 ContainerStyle::Ghost => Background::Color(Colors::Ghost.get()),
-                _ => Background::Color(Color::WHITE),
+                _ => Background::Color(Color::default()),
             }),
             border: Border {
                 radius: match self {
-                    ContainerStyle::Outline | ContainerStyle::ShadowOutline => 5.0.into(),
+                    ContainerStyle::Outline | ContainerStyle::ShadowOutline => 1.0.into(),
                     ContainerStyle::Rounded => BORDER_ROUNDED_RADIUS.into(),
                     _ => 0.0.into(),
                 },
                 width: match self {
-                    ContainerStyle::Rounded | ContainerStyle::Outline => BORDER_WIDTH * 2.0,
+                    ContainerStyle::Rounded | ContainerStyle::Outline => BORDER_WIDTH - 1.0,
                     _ => 0.0,
                 },
-                color: Color::default(),
+                color: match self {
+                    ContainerStyle::Outline => Colors::Night.get(),
+                    _ => Color::default(),
+                },
             },
             shadow: match self {
                 ContainerStyle::Shadowed | ContainerStyle::ShadowOutline => Shadow {

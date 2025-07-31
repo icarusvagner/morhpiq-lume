@@ -3,17 +3,34 @@ use iced::{
     Alignment, Length, Padding, Theme,
 };
 
-use crate::gui::{
-    components::types::{
-        button::{button_style, ButtonType},
-        input::InputType,
+use crate::{
+    gui::{
+        components::types::{
+            button::{button_style, ButtonType},
+            input::InputType,
+        },
+        morphiq::{Morphiq, SVG_FULLLOGO_BYTES},
+        styles::{container::ContainerStyle, style_constant::Colors},
+        types::{login::LoginMessage, message::Message},
     },
-    morphiq::{Morphiq, SVG_FULLLOGO_BYTES},
-    styles::style_constant::Colors,
-    types::{login::LoginMessage, message::Message},
+    utils::icons::Icon,
 };
 
 pub fn login_view(morphiq: &Morphiq) -> Container<'_, Message> {
+    let what_eye = if morphiq.pass_secure {
+        Icon::EyeOff
+            .to_text()
+            .size(24)
+            .align_x(Alignment::Center)
+            .align_y(Alignment::Center)
+    } else {
+        Icon::Eye
+            .to_text()
+            .size(24)
+            .align_x(Alignment::Center)
+            .align_y(Alignment::Center)
+    };
+
     let logo_full = Row::new()
         .push(
             Svg::new(Handle::from_memory(SVG_FULLLOGO_BYTES))
@@ -33,28 +50,43 @@ pub fn login_view(morphiq: &Morphiq) -> Container<'_, Message> {
                         morphiq.login_field.password.clone(),
                     ))
                 })
-                .width(Length::Fixed(450.0))
+                .width(Length::Fill)
                 .padding(Padding::from(10))
                 .line_height(text::LineHeight::Relative(1.75))
-                .style(InputType::Outline.input_style()),
+                .style(InputType::Outline.input_style())
+                .width(Length::Fixed(450.0)),
         )
         .width(Length::Fixed(450.0))
         .spacing(15);
+
     let password_input = Column::new()
         .push(text("Password *").size(18))
         .push(
-            text_input("Enter your password", &morphiq.login_field.password)
-                .on_input(|val| {
-                    Message::LoginMessage(LoginMessage::InputFieldChange(
-                        morphiq.login_field.username.clone(),
-                        val,
-                    ))
-                })
-                .width(Length::Fixed(450.0))
-                .secure(true)
-                .padding(Padding::from(10))
-                .line_height(text::LineHeight::Relative(1.75))
-                .style(InputType::Outline.input_style()),
+            container(
+                Row::new()
+                    .push(
+                        text_input("Enter your password", &morphiq.login_field.password)
+                            .on_input(|val| {
+                                Message::LoginMessage(LoginMessage::InputFieldChange(
+                                    morphiq.login_field.username.clone(),
+                                    val,
+                                ))
+                            })
+                            .width(Length::Fill)
+                            .secure(morphiq.pass_secure)
+                            .style(InputType::Base.input_style())
+                            .line_height(text::LineHeight::Relative(1.75)),
+                    )
+                    .push(
+                        button(what_eye)
+                            .style(button_style(&ButtonType::Nothing))
+                            .on_press(Message::ToggleShowPwd(!morphiq.pass_secure)),
+                    )
+                    .width(Length::Fill),
+            )
+            .width(Length::Fixed(450.0))
+            .padding(Padding::from(5))
+            .style(ContainerStyle::Outline.appearance()),
         )
         .width(Length::Fixed(450.0))
         .spacing(15);

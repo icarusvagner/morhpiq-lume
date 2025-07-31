@@ -17,6 +17,7 @@ pub struct Morphiq {
     pub theme: Theme,
     pub id: Option<window::Id>,
     pub login_field: LoginField,
+    pub pass_secure: bool,
 }
 
 pub const ICON_FONT_FAMILY_NAME: &str = "Icons for Morphiq Lume";
@@ -34,11 +35,15 @@ impl Morphiq {
             theme: Theme::Light,
             id: None,
             login_field: LoginField::default(),
+            pass_secure: true,
         }
     }
 
     pub fn update(&mut self, message: Message) -> Task<Message> {
         match message {
+            Message::ToggleShowPwd(is_pwd) => {
+                self.pass_secure = is_pwd;
+            }
             Message::ChangeRunningPage(running_view) => {
                 self.running_view = running_view;
             }

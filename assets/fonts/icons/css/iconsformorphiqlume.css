@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'iconsformorphiqlume';
-  src: url('../font/iconsformorphiqlume.eot?61152743');
-  src: url('../font/iconsformorphiqlume.eot?61152743#iefix') format('embedded-opentype'),
-       url('../font/iconsformorphiqlume.woff2?61152743') format('woff2'),
-       url('../font/iconsformorphiqlume.woff?61152743') format('woff'),
-       url('../font/iconsformorphiqlume.ttf?61152743') format('truetype'),
-       url('../font/iconsformorphiqlume.svg?61152743#iconsformorphiqlume') format('svg');
+  src: url('../font/iconsformorphiqlume.eot?31116243');
+  src: url('../font/iconsformorphiqlume.eot?31116243#iefix') format('embedded-opentype'),
+       url('../font/iconsformorphiqlume.woff2?31116243') format('woff2'),
+       url('../font/iconsformorphiqlume.woff?31116243') format('woff'),
+       url('../font/iconsformorphiqlume.ttf?31116243') format('truetype'),
+       url('../font/iconsformorphiqlume.svg?31116243#iconsformorphiqlume') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'iconsformorphiqlume';
-    src: url('../font/iconsformorphiqlume.svg?61152743#iconsformorphiqlume') format('svg');
+    src: url('../font/iconsformorphiqlume.svg?31116243#iconsformorphiqlume') format('svg');
   }
 }
 */
@@ -54,6 +54,30 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
+.morphiq-icon-eye-off:before { content: '\30'; } /* '0' */
+.morphiq-icon-equalizer:before { content: '\31'; } /* '1' */
+.morphiq-icon-download:before { content: '\32'; } /* '2' */
+.morphiq-icon-bookmark:before { content: '\33'; } /* '3' */
+.morphiq-icon-mobile:before { content: '\34'; } /* '4' */
+.morphiq-icon-tag:before { content: '\35'; } /* '5' */
+.morphiq-icon-tags:before { content: '\36'; } /* '6' */
+.morphiq-icon-mail-alt:before { content: '\37'; } /* '7' */
+.morphiq-icon-dot-3:before { content: '\38'; } /* '8' */
+.morphiq-icon-eye:before { content: '\39'; } /* '9' */
+.morphiq-icon-export-1:before { content: '\41'; } /* 'A' */
+.morphiq-icon-chart:before { content: '\42'; } /* 'B' */
+.morphiq-icon-spin3:before { content: '\43'; } /* 'C' */
+.morphiq-icon-spin6:before { content: '\44'; } /* 'D' */
+.morphiq-icon-chrome:before { content: '\45'; } /* 'E' */
+.morphiq-icon-comment-inv-alt2:before { content: '\46'; } /* 'F' */
+.morphiq-icon-chart-bar:before { content: '\47'; } /* 'G' */
+.morphiq-icon-chart-pie:before { content: '\48'; } /* 'H' */
+.morphiq-icon-sun-inv:before { content: '\49'; } /* 'I' */
+.morphiq-icon-moon-inv:before { content: '\4a'; } /* 'J' */
+.morphiq-icon-volume-up:before { content: '\4b'; } /* 'K' */
+.morphiq-icon-wrench:before { content: '\4c'; } /* 'L' */
+.morphiq-icon-file-pdf:before { content: '\4d'; } /* 'M' */
+.morphiq-icon-doc-text-inv:before { content: '\4e'; } /* 'N' */
 .morphiq-icon-cancel:before { content: '\61'; } /* 'a' */
 .morphiq-icon-user-times:before { content: '\62'; } /* 'b' */
 .morphiq-icon-user-plus:before { content: '\63'; } /* 'c' */
@@ -75,3 +99,8 @@
 .morphiq-icon-sort-alt-up:before { content: '\73'; } /* 's' */
 .morphiq-icon-language:before { content: '\74'; } /* 't' */
 .morphiq-icon-language-1:before { content: '\75'; } /* 'u' */
+.morphiq-icon-github-circled-alt2:before { content: '\76'; } /* 'v' */
+.morphiq-icon-link:before { content: '\78'; } /* 'x' */
+.morphiq-icon-export:before { content: '\79'; } /* 'y' */
+.morphiq-icon-download-alt:before { content: '\7a'; } /* 'z' */
+.morphiq-icon-paper-plane:before { content: '\f01d'; } /* '' */

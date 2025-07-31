@@ -4,4 +4,5 @@ use crate::gui::{types::login::LoginMessage, views::RunningView};
 pub enum Message {
     ChangeRunningPage(RunningView),
     LoginMessage(LoginMessage),
+    ToggleShowPwd(bool),
 }

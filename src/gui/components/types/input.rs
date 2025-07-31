@@ -48,20 +48,20 @@ impl InputType {
                     _ => Color::TRANSPARENT,
                 },
                 width: 1.0,
-                radius: 0.0.into(),
+                radius: 1.0.into(),
             },
             icon: Color::default(),
             placeholder: match self {
-                InputType::Base | InputType::Ghost => Colors::AntiFlashWhite.get(),
-                InputType::Tertiary | InputType::Outline => Colors::Silver.get(),
+                InputType::Ghost => Colors::AntiFlashWhite.get(),
+                InputType::Base | InputType::Tertiary | InputType::Outline => Colors::Silver.get(),
                 _ => Color::default(),
             },
             value: match self {
-                InputType::Base | InputType::Ghost => Colors::AntiFlashWhite.get(),
-                InputType::Outline | InputType::Tertiary => Colors::Night.get(),
+                InputType::Ghost => Colors::AntiFlashWhite.get(),
+                InputType::Base | InputType::Outline | InputType::Tertiary => Colors::Night.get(),
                 _ => Colors::Night.get(),
             },
-            selection: Color::default(),
+            selection: Colors::UTOrange.get(),
         }
     }
 }
