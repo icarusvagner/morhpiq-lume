@@ -1,15 +1,28 @@
 use iced::{
-    widget::{button, container, text, text_input, Column, Container},
+    widget::{button, container, svg::Handle, text, text_input, Column, Container, Row, Svg},
     Alignment, Length, Padding, Theme,
 };
 
 use crate::gui::{
-    components::types::button::{button_style, ButtonType},
-    morphiq::Morphiq,
+    components::types::{
+        button::{button_style, ButtonType},
+        input::InputType,
+    },
+    morphiq::{Morphiq, SVG_FULLLOGO_BYTES},
+    styles::style_constant::Colors,
     types::{login::LoginMessage, message::Message},
 };
 
 pub fn login_view(morphiq: &Morphiq) -> Container<'_, Message> {
+    let logo_full = Row::new()
+        .push(
+            Svg::new(Handle::from_memory(SVG_FULLLOGO_BYTES))
+                .height(Length::Fixed(110.0))
+                .width(Length::Fill),
+        )
+        .width(Length::Fixed(450.0))
+        .align_y(Alignment::Center);
+
     let username_input = Column::new()
         .push(text("Username *").size(18))
         .push(
@@ -20,8 +33,10 @@ pub fn login_view(morphiq: &Morphiq) -> Container<'_, Message> {
                         morphiq.login_field.password.clone(),
                     ))
                 })
+                .width(Length::Fixed(450.0))
                 .padding(Padding::from(10))
-                .line_height(text::LineHeight::Relative(1.75)),
+                .line_height(text::LineHeight::Relative(1.75))
+                .style(InputType::Outline.input_style()),
         )
         .width(Length::Fixed(450.0))
         .spacing(15);
@@ -35,46 +50,51 @@ pub fn login_view(morphiq: &Morphiq) -> Container<'_, Message> {
                         val,
                     ))
                 })
+                .width(Length::Fixed(450.0))
                 .secure(true)
                 .padding(Padding::from(10))
-                .line_height(text::LineHeight::Relative(1.75)),
+                .line_height(text::LineHeight::Relative(1.75))
+                .style(InputType::Outline.input_style()),
         )
         .width(Length::Fixed(450.0))
         .spacing(15);
 
-    let content = Column::new()
-        .push(username_input)
-        .push(password_input)
-        .push(
-            button(
-                text("Submit")
-                    .size(20)
-                    .align_x(Alignment::Center)
-                    .align_y(Alignment::Center),
+    let content = container(
+        Column::new()
+            .push(logo_full)
+            .push(username_input)
+            .push(password_input)
+            .push(
+                button(
+                    text("Submit")
+                        .size(20)
+                        .align_x(Alignment::Center)
+                        .align_y(Alignment::Center),
+                )
+                .style(button_style(&ButtonType::Primary))
+                .width(Length::Fixed(450.0))
+                .height(45.0)
+                .on_press(Message::LoginMessage(LoginMessage::LoginSubmit)),
             )
-            .style(button_style(&ButtonType::Primary))
-            .width(Length::Fixed(450.0))
-            .height(45.0)
-            .on_press(Message::LoginMessage(LoginMessage::LoginSubmit)),
-        )
-        .spacing(20)
-        .align_x(Alignment::Center);
+            .spacing(20)
+            .align_x(Alignment::Center),
+    )
+    .style(login_container_style())
+    .padding(Padding::from(20))
+    .align_x(Alignment::Center)
+    .align_y(Alignment::Center);
 
     container(content)
-        .width(Length::Fixed(450.0))
         .center_x(Length::Fill)
         .center_y(Length::Fill)
-        .align_x(Alignment::Center)
-        .align_y(Alignment::Center)
-        .style(login_continer_style())
 }
 
-fn login_continer_style() -> impl Fn(&Theme) -> container::Style {
+fn login_container_style() -> impl Fn(&Theme) -> container::Style {
     |_| container::Style {
         shadow: iced::Shadow {
-            color: iced::Color::BLACK,
-            offset: iced::Vector::new(2.0, 4.0),
-            blur_radius: 50.0,
+            color: Colors::Night.get(),
+            offset: iced::Vector::new(0.0, 2.0),
+            blur_radius: 30.0,
         },
         background: None,
         text_color: None,

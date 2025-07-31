@@ -1,4 +1,8 @@
-use iced::{widget::container, window, Alignment, Element, Length, Task, Theme};
+use iced::{
+    widget::container,
+    window::{self, Id},
+    Element, Length, Task, Theme,
+};
 
 use crate::gui::{
     types::{
@@ -15,8 +19,9 @@ pub struct Morphiq {
     pub login_field: LoginField,
 }
 
-pub const ICON_FONT_FAMILY_NAME: &str = "iconsformorphiqlume";
-pub const FONT_FAMILY_NAME: &str = "Raleway";
+pub const ICON_FONT_FAMILY_NAME: &str = "Icons for Morphiq Lume";
+pub const FONT_FAMILY_NAME: &str = "Outfit";
+pub const SVG_FULLLOGO_BYTES: &[u8] = include_bytes!("../../assets/logos/icons/full/icon_full.svg");
 
 impl Morphiq {
     pub fn theme(&self) -> Theme {
@@ -45,18 +50,20 @@ impl Morphiq {
                     if !self.login_field.username.is_empty()
                         && !self.login_field.password.is_empty()
                     {
-                        self.running_view = RunningView::Dashboard;
+                        self.running_view = RunningView::Home;
                     }
                 }
             },
         }
+
         Task::none()
     }
 
     pub fn view<'a>(&'a self) -> Element<'a, Message> {
+        let _window_id = self.id.unwrap_or_else(Id::unique);
         let content = match self.running_view {
             RunningView::Login => login_view(self),
-            RunningView::Dashboard => dashboard_view(self),
+            RunningView::Home => dashboard_view(self),
         };
 
         container(content)

@@ -5,9 +5,9 @@ use iced::{Font, Pixels, Settings, Task};
 use crate::gui::{
     morphiq::{Morphiq, FONT_FAMILY_NAME},
     styles::style_constant::{
-        FONT_SIZE_BODY, ICONS_BYTES, ORBITRON_BLACK_BYTES, ORBITRON_BOLD_BYTES,
-        ORBITRON_EXTRABOLD_BYTES, ORBITRON_MEDIUM_BYTES, ORBITRON_REGULAR_BYTES,
-        ORBITRON_SEMIBOLD_BYTES, RALEWAY_BLACK_BYTES, RALEWAY_BLACK_ITALIC_BYTES,
+        FONT_SIZE_BODY, ICONS_BYTES, OUTFIT_BLACK_BYTES, OUTFIT_BOLD_BYTES, OUTFIT_EXTRABOLD_BYTES,
+        OUTFIT_EXTRALIGHT_BYTES, OUTFIT_LIGHT_BYTES, OUTFIT_MEDIUM_BYTES, OUTFIT_REGULAR_BYTES,
+        OUTFIT_SEMIBOLD_BYTES, OUTFIT_THIN_BYTES, RALEWAY_BLACK_BYTES, RALEWAY_BLACK_ITALIC_BYTES,
         RALEWAY_BOLD_BYTES, RALEWAY_BOLD_ITALIC_BYTES, RALEWAY_EXTRA_BOLD_BYTES,
         RALEWAY_EXTRA_BOLD_ITALIC_BYTES, RALEWAY_EXTRA_LIGHT_BYTES,
         RALEWAY_EXTRA_LIGHT_ITALIC_BYTES, RALEWAY_ITALIC_BYTES, RALEWAY_LIGHT_BYTES,
@@ -30,12 +30,15 @@ pub fn main() -> iced::Result {
             id: Some(String::from(MORPHIQ_LOWERCASE)),
             fonts: [
                 Cow::Borrowed(ICONS_BYTES),
-                Cow::Borrowed(ORBITRON_REGULAR_BYTES),
-                Cow::Borrowed(ORBITRON_MEDIUM_BYTES),
-                Cow::Borrowed(ORBITRON_SEMIBOLD_BYTES),
-                Cow::Borrowed(ORBITRON_BLACK_BYTES),
-                Cow::Borrowed(ORBITRON_BOLD_BYTES),
-                Cow::Borrowed(ORBITRON_EXTRABOLD_BYTES),
+                Cow::Borrowed(OUTFIT_EXTRALIGHT_BYTES),
+                Cow::Borrowed(OUTFIT_LIGHT_BYTES),
+                Cow::Borrowed(OUTFIT_THIN_BYTES),
+                Cow::Borrowed(OUTFIT_REGULAR_BYTES),
+                Cow::Borrowed(OUTFIT_MEDIUM_BYTES),
+                Cow::Borrowed(OUTFIT_SEMIBOLD_BYTES),
+                Cow::Borrowed(OUTFIT_BLACK_BYTES),
+                Cow::Borrowed(OUTFIT_BOLD_BYTES),
+                Cow::Borrowed(OUTFIT_EXTRABOLD_BYTES),
                 Cow::Borrowed(RALEWAY_REGULAR_BYTES),
                 Cow::Borrowed(RALEWAY_BLACK_BYTES),
                 Cow::Borrowed(RALEWAY_BLACK_ITALIC_BYTES),
@@ -60,6 +63,7 @@ pub fn main() -> iced::Result {
             default_text_size: Pixels(FONT_SIZE_BODY),
             antialiasing: true,
         })
+        // .window(iced::window::Settings { })
         .theme(Morphiq::theme)
         .centered()
         .run_with(move || (Morphiq::new(), Task::none()))

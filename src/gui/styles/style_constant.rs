@@ -15,6 +15,7 @@ pub enum Colors {
     SkyBlue,
     AntiFlashWhite,
     Night,
+    Silver,
 }
 
 impl Colors {
@@ -25,6 +26,12 @@ impl Colors {
                 g: 121.0 / 255.0,
                 b: 121.0 / 255.0,
                 a: 10.0 / 100.0,
+            },
+            Colors::Silver => Color {
+                r: 201.0 / 255.0,
+                g: 201.0 / 255.0,
+                b: 201.0 / 255.0,
+                a: 1.0,
             },
             Colors::UTOrange => UT_ORANGE,
             Colors::SelectiveYellow => SELECTIVE_YELLOW,
@@ -87,56 +94,75 @@ const NIGHT: Color = Color {
 };
 
 /// fonts
-// Orbitron Font
-pub const ORBITRON_REGULAR_BYTES: &[u8] =
-    include_bytes!("../../../assets/fonts/Orbitron/Orbitron-Regular.ttf");
-pub const ORBITRON_REGULAR: Font = Font {
-    family: Family::Name(ICON_FONT_FAMILY_NAME),
+// Outfit Font (Bytes)
+pub const OUTFIT_EXTRALIGHT_BYTES: &[u8] =
+    include_bytes!("../../../assets/fonts/Outfit/Outfit-ExtraLight.ttf");
+pub const OUTFIT_LIGHT_BYTES: &[u8] =
+    include_bytes!("../../../assets/fonts/Outfit/Outfit-Light.ttf");
+pub const OUTFIT_THIN_BYTES: &[u8] = include_bytes!("../../../assets/fonts/Outfit/Outfit-Thin.ttf");
+pub const OUTFIT_REGULAR_BYTES: &[u8] =
+    include_bytes!("../../../assets/fonts/Outfit/Outfit-Regular.ttf");
+pub const OUTFIT_MEDIUM_BYTES: &[u8] =
+    include_bytes!("../../../assets/fonts/Outfit/Outfit-Medium.ttf");
+pub const OUTFIT_SEMIBOLD_BYTES: &[u8] =
+    include_bytes!("../../../assets/fonts/Outfit/Outfit-SemiBold.ttf");
+pub const OUTFIT_BOLD_BYTES: &[u8] = include_bytes!("../../../assets/fonts/Outfit/Outfit-Bold.ttf");
+pub const OUTFIT_EXTRABOLD_BYTES: &[u8] =
+    include_bytes!("../../../assets/fonts/Outfit/Outfit-ExtraBold.ttf");
+pub const OUTFIT_BLACK_BYTES: &[u8] =
+    include_bytes!("../../../assets/fonts/Outfit/Outfit-Black.ttf");
+
+// Outfit Font (Font objects)
+pub const OUTFIT_EXTRALIGHT: Font = Font {
+    family: Family::Name("Outfit"),
+    weight: Weight::ExtraLight,
+    stretch: Stretch::Normal,
+    style: Style::Normal,
+};
+pub const OUTFIT_LIGHT: Font = Font {
+    family: Family::Name("Outfit"),
+    weight: Weight::Light,
+    stretch: Stretch::Normal,
+    style: Style::Normal,
+};
+pub const OUTFIT_THIN: Font = Font {
+    family: Family::Name("Outfit"),
+    weight: Weight::Thin,
+    stretch: Stretch::Normal,
+    style: Style::Normal,
+};
+pub const OUTFIT_REGULAR: Font = Font {
+    family: Family::Name("Outfit"),
     weight: Weight::Normal,
     stretch: Stretch::Normal,
     style: Style::Normal,
 };
-
-pub const ORBITRON_MEDIUM_BYTES: &[u8] =
-    include_bytes!("../../../assets/fonts/Orbitron/Orbitron-Medium.ttf");
-pub const ORBITRON_MEDIUM: Font = Font {
-    family: Family::Name(ICON_FONT_FAMILY_NAME),
+pub const OUTFIT_MEDIUM: Font = Font {
+    family: Family::Name("Outfit"),
     weight: Weight::Medium,
     stretch: Stretch::Normal,
     style: Style::Normal,
 };
-
-pub const ORBITRON_SEMIBOLD_BYTES: &[u8] =
-    include_bytes!("../../../assets/fonts/Orbitron/Orbitron-SemiBold.ttf");
-pub const ORBITRON_SEMIBOLD: Font = Font {
-    family: Family::Name(ICON_FONT_FAMILY_NAME),
-    weight: Weight::Semibold,
+pub const OUTFIT_SEMIBOLD: Font = Font {
+    family: Family::Name("Outfit"),
+    weight: Weight::Normal,
     stretch: Stretch::Normal,
     style: Style::Normal,
 };
-
-pub const ORBITRON_BOLD_BYTES: &[u8] =
-    include_bytes!("../../../assets/fonts/Orbitron/Orbitron-Bold.ttf");
-pub const ORBITRON_BOLD: Font = Font {
-    family: Family::Name(ICON_FONT_FAMILY_NAME),
+pub const OUTFIT_BOLD: Font = Font {
+    family: Family::Name("Outfit"),
     weight: Weight::Bold,
     stretch: Stretch::Normal,
     style: Style::Normal,
 };
-
-pub const ORBITRON_EXTRABOLD_BYTES: &[u8] =
-    include_bytes!("../../../assets/fonts/Orbitron/Orbitron-ExtraBold.ttf");
-pub const ORBITRON_EXTRABOLD: Font = Font {
-    family: Family::Name(ICON_FONT_FAMILY_NAME),
+pub const OUTFIT_EXTRABOLD: Font = Font {
+    family: Family::Name("Outfit"),
     weight: Weight::ExtraBold,
     stretch: Stretch::Normal,
     style: Style::Normal,
 };
-
-pub const ORBITRON_BLACK_BYTES: &[u8] =
-    include_bytes!("../../../assets/fonts/Orbitron/Orbitron-Black.ttf");
-pub const ORBITRON_BLACK: Font = Font {
-    family: Family::Name(ICON_FONT_FAMILY_NAME),
+pub const OUTFIT_BLACK: Font = Font {
+    family: Family::Name("Outfit"),
     weight: Weight::Black,
     stretch: Stretch::Normal,
     style: Style::Normal,
@@ -182,7 +208,7 @@ pub const RALEWAY_THIN_BYTES: &[u8] =
 
 // Raleway Font (Font objects)
 pub const RALEWAY_REGULAR: Font = Font {
-    family: Family::Name(ICON_FONT_FAMILY_NAME),
+    family: Family::Name("Raleway"),
     weight: Weight::Normal,
     stretch: Stretch::Normal,
     style: Style::Normal,
