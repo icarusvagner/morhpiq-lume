@@ -1,5 +1,5 @@
 use iced::{
-    widget::{button, container, text, Column, Container, Row},
+    widget::{button, container, text, vertical_rule, Column, Container, Row},
     Alignment, Length,
 };
 
@@ -11,7 +11,8 @@ use crate::gui::{
 
 pub fn dashboard_view(morphiq: &Morphiq) -> Container<'_, Message> {
     let content = Row::new()
-        .push(sidebar_menu())
+        .push(sidebar_menu(morphiq))
+        .push(vertical_rule(2.0))
         .push(
             Column::new()
                 .push(header_view(morphiq))
@@ -20,7 +21,8 @@ pub fn dashboard_view(morphiq: &Morphiq) -> Container<'_, Message> {
                     button(text("Goto login").size(16).align_x(Alignment::Center))
                         .width(Length::Fixed(450.0))
                         .on_press(Message::ChangeRunningPage(super::RunningView::Login)),
-                ),
+                )
+                .width(Length::Fill),
         )
         .spacing(10);
 

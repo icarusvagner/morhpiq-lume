@@ -35,7 +35,7 @@ impl ContainerStyle {
                     _ => 0.0,
                 },
                 color: match self {
-                    ContainerStyle::Outline => Colors::Night.get(),
+                    ContainerStyle::Outline | ContainerStyle::Rounded => Colors::Night.get(),
                     _ => Color::default(),
                 },
             },

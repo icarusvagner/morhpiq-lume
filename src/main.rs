@@ -1,6 +1,6 @@
 use std::borrow::Cow;
 
-use iced::{Font, Pixels, Settings, Task};
+use iced::{window, Font, Pixels, Settings, Size, Task};
 
 use crate::gui::{
     morphiq::{Morphiq, FONT_FAMILY_NAME},
@@ -63,7 +63,21 @@ pub fn main() -> iced::Result {
             default_text_size: Pixels(FONT_SIZE_BODY),
             antialiasing: true,
         })
-        // .window(iced::window::Settings { })
+        .window(iced::window::Settings {
+            icon: window::icon::from_file_data(
+                WINDOW_ICON,
+                Some(iced::advanced::graphics::image::image_rs::ImageFormat::Png),
+            )
+            .ok(),
+            min_size: None,
+            max_size: None,
+            visible: true,
+            resizable: true,
+            decorations: true,
+            transparent: false,
+            ..Default::default()
+        })
+        .window_size(Size::INFINITY)
         .theme(Morphiq::theme)
         .centered()
         .run_with(move || (Morphiq::new(), Task::none()))

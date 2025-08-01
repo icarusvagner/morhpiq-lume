@@ -12,7 +12,7 @@ use crate::{
     utils::icons::Icon,
 };
 
-pub fn header_view(morphiq: &Morphiq) -> Container<'_, Message> {
+pub fn header_view(_morphiq: &Morphiq) -> Container<'_, Message> {
     let greeting = Column::new()
         .push(
             text("Welcome back Lance")
@@ -44,7 +44,7 @@ pub fn header_view(morphiq: &Morphiq) -> Container<'_, Message> {
                             .align_y(Alignment::Center),
                     )
                     .push(horizontal_space())
-                    .spacing(2)
+                    .spacing(5)
                     .align_y(Alignment::Center)
                     .width(Length::Fill),
             )
@@ -73,7 +73,7 @@ pub fn header_view(morphiq: &Morphiq) -> Container<'_, Message> {
                             .align_y(Alignment::Center),
                     )
                     .push(horizontal_space())
-                    .spacing(2)
+                    .spacing(5)
                     .align_y(Alignment::Center)
                     .width(Length::Fill),
             )

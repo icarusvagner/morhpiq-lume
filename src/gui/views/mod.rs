@@ -1,10 +1,21 @@
 pub mod dashboard_view;
-pub mod login_view;
 pub mod home;
 pub mod layouts;
+pub mod login_view;
 
 #[derive(Debug, Clone)]
 pub enum RunningView {
     Login,
-    Home,
+    Home(InsideView),
+}
+
+#[derive(Debug, Clone)]
+pub enum InsideView {
+    Dashboard,
+    Employee,
+    Attendance,
+    Payroll,
+    Leaves,
+    Documents,
+    Settings,
 }

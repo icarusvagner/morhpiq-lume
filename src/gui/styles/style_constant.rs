@@ -6,6 +6,7 @@ use iced::{
 use crate::gui::morphiq::ICON_FONT_FAMILY_NAME;
 
 // dat theme colors
+#[derive(Debug, Clone)]
 pub enum Colors {
     Ghost,
     UTOrange,
@@ -16,11 +17,46 @@ pub enum Colors {
     AntiFlashWhite,
     Night,
     Silver,
+    DarkPastelGreen,
+    Xanthous,
+    Red,
+    Pumpkin,
+    MayaBlue,
 }
 
 impl Colors {
     pub fn get(&self) -> Color {
         match self {
+            Colors::MayaBlue => Color {
+                r: 78.0 / 255.0,
+                g: 187.0 / 255.0,
+                b: 255.0,
+                a: 1.0,
+            },
+            Colors::DarkPastelGreen => Color {
+                r: 0.0 / 255.0,
+                g: 201.0 / 255.0,
+                b: 81.0 / 255.0,
+                a: 1.0,
+            },
+            Colors::Xanthous => Color {
+                r: 250.0 / 255.0,
+                g: 177.0 / 255.0,
+                b: 0.0 / 255.0,
+                a: 1.0,
+            },
+            Colors::Red => Color {
+                r: 231.0 / 255.0,
+                g: 0.0 / 255.0,
+                b: 11.0 / 255.0,
+                a: 1.0,
+            },
+            Colors::Pumpkin => Color {
+                r: 255.0,
+                g: 105.0 / 255.0,
+                b: 0.0 / 255.0,
+                a: 1.0,
+            },
             Colors::Ghost => Color {
                 r: 121.0 / 255.0,
                 g: 121.0 / 255.0,
