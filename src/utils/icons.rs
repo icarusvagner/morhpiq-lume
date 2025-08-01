@@ -135,7 +135,7 @@ impl Icon {
             Icon::Money => 'Y',
             Icon::Logout1 => 'Z',
             Icon::TrendingDown => '[',
-            Icon::TrendingUp => ']',
+            Icon::TrendingUp => '\\',
         }
     }
 
