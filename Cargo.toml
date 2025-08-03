@@ -83,6 +83,10 @@ sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "macros", "postg
 # Regex Utilities
 lazy-regex = { version = "3.4.1" }         # Fast compile-once regex for validations
 
+# Other
+thiserror = "2.0.12"
+clap = { version = "4.5.42", features = ["derive"] }
+
 #================================================================================
 # Development & Testing
 #================================================================================
