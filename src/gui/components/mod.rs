@@ -1,3 +1,4 @@
+pub mod charts;
 pub mod header;
-pub mod types;
 pub mod menu;
+pub mod types;
