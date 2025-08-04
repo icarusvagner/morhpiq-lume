@@ -1,7 +1,7 @@
 use iced::{
     widget::{
-        canvas::{self, Frame, Geometry},
-        container, Container,
+        canvas::{Frame, Geometry, Program},
+        Canvas,
     },
     Element, Length, Point, Rectangle, Renderer, Size, Theme,
 };
@@ -43,17 +43,15 @@ impl StackedBarChart {
         }
     }
 
-    pub fn chart_view<'a>(&'a self) -> Container<'a, Message> {
-        container(
-            canvas::Canvas::new(self)
-                .width(Length::Fixed(self.width))
-                .height(Length::Fixed(self.height)),
-        )
-        .width(Length::Fill)
+    pub fn chart_view<'a>(&'a self) -> Element<'a, Message> {
+        Canvas::new(self.clone())
+            .width(Length::Fixed(self.width))
+            .height(Length::Fixed(self.height))
+            .into()
     }
 }
 
-impl canvas::Program<Message> for StackedBarChart {
+impl<Message> Program<Message, Theme, Renderer> for StackedBarChart {
     type State = ();
 
     fn draw(

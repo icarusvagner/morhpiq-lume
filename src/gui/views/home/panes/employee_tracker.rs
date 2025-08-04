@@ -5,14 +5,10 @@ use iced::{
     },
     Alignment, Background, Border, Color, Length, Padding, Shadow, Theme,
 };
-use palette::IntoColor;
 
 use crate::{
     gui::{
-        components::{
-            charts::bars::stacked::{Bar, Segment, StackedBarChart},
-            types::button::{button_style, ButtonType},
-        },
+        components::types::button::{button_style, ButtonType},
         morphiq::Morphiq,
         styles::{container::ContainerStyle, style_constant::Colors},
         types::message::Message,
@@ -50,48 +46,7 @@ fn bar_chart_tracker<'a>() -> Container<'a, Message> {
             .style(ContainerStyle::Rounded.appearance()),
         );
 
-    let bars = [
-        Bar {
-            segments: vec![
-                Segment {
-                    height: 50.0,
-                    color: Color::from_rgb(0.2, 0.5, 0.8),
-                },
-                Segment {
-                    height: 30.0,
-                    color: Color::from_rgb(0.4, 0.7, 0.6),
-                },
-                Segment {
-                    height: 20.0,
-                    color: Color::from_rgb(0.9, 0.8, 0.2),
-                },
-            ],
-            label: Some("A".to_string()),
-        },
-        Bar {
-            segments: vec![
-                Segment {
-                    height: 40.0,
-                    color: Color::from_rgb(0.2, 0.5, 0.8),
-                },
-                Segment {
-                    height: 20.0,
-                    color: Color::from_rgb(0.4, 0.7, 0.6),
-                },
-                Segment {
-                    height: 10.0,
-                    color: Color::from_rgb(0.9, 0.8, 0.2),
-                },
-            ],
-            label: Some("B".to_string()),
-        },
-    ]
-    .to_vec();
-
-    let chart = StackedBarChart::new(bars);
-    let chart_view = chart.chart_view();
-
-    let content = Column::new().push(header).push(chart_view).spacing(15);
+    let content = Column::new().push(header).spacing(15);
 
     container(content)
         .padding(Padding::from(15))
