@@ -1,5 +1,5 @@
 use iced::{
-    widget::{button, container, text, vertical_rule, Column, Container, Row},
+    widget::{button, container, text, vertical_rule, Column, Container, Row, Scrollable},
     Alignment, Length,
 };
 
@@ -10,18 +10,13 @@ use crate::gui::{
     views::{home::dashboard_view, InsideView},
 };
 
-pub struct MainLayout<'a> {
-    morphiq: Option<&'a Morphiq>,
-    inside_view: Option<&'a InsideView>,
-}
-
 pub fn main_layout<'a>(
     morphiq: &'a Morphiq,
     inside_view: &'a InsideView,
 ) -> Container<'a, Message> {
     let view_layout = Column::new()
         .push(header_view(morphiq))
-        .push(to_view(morphiq, inside_view));
+        .push(Scrollable::new(to_view(morphiq, inside_view)));
 
     let content = Row::new()
         .push(sidebar_menu(morphiq))

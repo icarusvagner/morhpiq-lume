@@ -8,9 +8,15 @@ use iced::{
 
 use crate::{
     gui::{
-        components::types::button::{button_style, ButtonType},
+        components::{
+            charts::bars::stacked::{vertical::vertical_stacked_bar, BarSegment, StackedBar},
+            types::button::{button_style, ButtonType},
+        },
         morphiq::Morphiq,
-        styles::{container::ContainerStyle, style_constant::Colors},
+        styles::{
+            container::ContainerStyle,
+            style_constant::{Colors, OUTFIT_MEDIUM},
+        },
         types::message::Message,
     },
     utils::icons::Icon,
@@ -20,7 +26,7 @@ pub fn employee_tracker<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
     let content = Row::new()
         .push(tracker())
         .push(vertical_rule(2.0))
-        .push(bar_chart_tracker())
+        .push(bar_chart_tracker(_morphiq))
         .spacing(15);
 
     container(content)
@@ -28,7 +34,130 @@ pub fn employee_tracker<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
         .style(ContainerStyle::Rounded.appearance())
 }
 
-fn bar_chart_tracker<'a>() -> Container<'a, Message> {
+fn bar_chart_tracker<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
+    let data = [
+        StackedBar {
+            label: "Sun".to_string(),
+            segments: vec![
+                BarSegment {
+                    value: 30.0,
+                    color: Colors::MayaBlue.get(),
+                },
+                BarSegment {
+                    value: 20.0,
+                    color: Colors::UTOrange.get(),
+                },
+                BarSegment {
+                    value: 5.0,
+                    color: Colors::SelectiveYellow.get(),
+                },
+            ],
+        },
+        StackedBar {
+            label: "Mon".to_string(),
+            segments: vec![
+                BarSegment {
+                    value: 35.0,
+                    color: Colors::MayaBlue.get(),
+                },
+                BarSegment {
+                    value: 23.0,
+                    color: Colors::UTOrange.get(),
+                },
+                BarSegment {
+                    value: 8.0,
+                    color: Colors::SelectiveYellow.get(),
+                },
+            ],
+        },
+        StackedBar {
+            label: "Tue".to_string(),
+            segments: vec![
+                BarSegment {
+                    value: 15.0,
+                    color: Colors::MayaBlue.get(),
+                },
+                BarSegment {
+                    value: 33.0,
+                    color: Colors::UTOrange.get(),
+                },
+                BarSegment {
+                    value: 8.0,
+                    color: Colors::SelectiveYellow.get(),
+                },
+            ],
+        },
+        StackedBar {
+            label: "Wed".to_string(),
+            segments: vec![
+                BarSegment {
+                    value: 15.0,
+                    color: Colors::MayaBlue.get(),
+                },
+                BarSegment {
+                    value: 28.0,
+                    color: Colors::UTOrange.get(),
+                },
+                BarSegment {
+                    value: 13.0,
+                    color: Colors::SelectiveYellow.get(),
+                },
+            ],
+        },
+        StackedBar {
+            label: "Thu".to_string(),
+            segments: vec![
+                BarSegment {
+                    value: 35.0,
+                    color: Colors::MayaBlue.get(),
+                },
+                BarSegment {
+                    value: 18.0,
+                    color: Colors::UTOrange.get(),
+                },
+                BarSegment {
+                    value: 3.0,
+                    color: Colors::SelectiveYellow.get(),
+                },
+            ],
+        },
+        StackedBar {
+            label: "Fri".to_string(),
+            segments: vec![
+                BarSegment {
+                    value: 30.0,
+                    color: Colors::MayaBlue.get(),
+                },
+                BarSegment {
+                    value: 18.0,
+                    color: Colors::UTOrange.get(),
+                },
+                BarSegment {
+                    value: 8.0,
+                    color: Colors::SelectiveYellow.get(),
+                },
+            ],
+        },
+        StackedBar {
+            label: "Sat".to_string(),
+            segments: vec![
+                BarSegment {
+                    value: 25.0,
+                    color: Colors::MayaBlue.get(),
+                },
+                BarSegment {
+                    value: 20.0,
+                    color: Colors::UTOrange.get(),
+                },
+                BarSegment {
+                    value: 11.0,
+                    color: Colors::SelectiveYellow.get(),
+                },
+            ],
+        },
+    ]
+    .to_vec();
+
     let header = Row::new()
         .push(text("Employee's Tracker").size(24))
         .push(horizontal_space())
@@ -46,7 +175,14 @@ fn bar_chart_tracker<'a>() -> Container<'a, Message> {
             .style(ContainerStyle::Rounded.appearance()),
         );
 
-    let content = Column::new().push(header).spacing(15);
+    let content = Column::new()
+        .push(header)
+        .push(vertical_stacked_bar(
+            data,
+            OUTFIT_MEDIUM,
+            String::from("Employee Tracker"),
+        ))
+        .spacing(15);
 
     container(content)
         .padding(Padding::from(15))
