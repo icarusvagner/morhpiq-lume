@@ -1,94 +1,111 @@
 use iced::{
-    widget::{
-        canvas::{Frame, Geometry, Program},
-        Canvas,
-    },
-    Element, Length, Point, Rectangle, Renderer, Size, Theme,
+    widget::canvas::{Cache, Frame, Geometry},
+    Element, Length, Size,
 };
+use plotters::prelude::*;
+use plotters::style::Color;
+use plotters_iced::{Chart, ChartBuilder, ChartWidget, DrawingBackend, Renderer};
 
-use crate::gui::types::message::Message;
+use crate::gui::{components::charts::bars::CategoryData, types::message::Message};
 
-#[derive(Debug, Clone)]
-pub struct Segment {
-    pub height: f32,        // value (proportional)
-    pub color: iced::Color, // segment color
-}
-
-#[derive(Debug, Clone)]
-pub struct Bar {
-    pub segments: Vec<Segment>, // stacked segments
-    pub label: Option<String>,  // optional label below bar
-}
-
-#[derive(Debug, Clone)]
 pub struct StackedBarChart {
-    bars: Vec<Bar>,
-    max_value: f32,
-    width: f32,
-    height: f32,
+    width: Length,
+    height: Length,
+    cache: Cache,
+    data: Vec<CategoryData>,
 }
 
 impl StackedBarChart {
-    pub fn new(bars: Vec<Bar>) -> Self {
-        let max_value = bars
-            .iter()
-            .map(|bar| bar.segments.iter().map(|s| s.height).sum::<f32>())
-            .fold(0.0, f32::max);
-
+    pub fn new(data: Vec<CategoryData>) -> Self {
         Self {
-            bars,
-            max_value,
-            width: 400.0,
-            height: 300.0,
+            height: Length::Fill,
+            width: Length::Fill,
+            cache: Cache::new(),
+            data,
         }
     }
 
-    pub fn chart_view<'a>(&'a self) -> Element<'a, Message> {
-        Canvas::new(self.clone())
-            .width(Length::Fixed(self.width))
-            .height(Length::Fixed(self.height))
+    pub fn view(&self) -> Element<'_, Message> {
+        ChartWidget::new(self)
+            .width(self.width)
+            .height(self.height)
             .into()
     }
 }
 
-impl<Message> Program<Message, Theme, Renderer> for StackedBarChart {
+impl Chart<Message> for StackedBarChart {
     type State = ();
 
-    fn draw(
+    fn draw<R: Renderer, F: Fn(&mut Frame)>(
         &self,
-        _state: &Self::State,
-        renderer: &Renderer,
-        _theme: &Theme,
-        _bounds: iced::Rectangle,
-        _cursor: iced::advanced::mouse::Cursor,
-    ) -> Vec<Geometry<Renderer>> {
-        let mut frame = Frame::new(renderer, Size::new(self.width, self.height));
-        let bar_width = (self.width - 40.0) / self.bars.len() as f32;
-        let spacing = 8.0;
+        renderer: &R,
+        bounds: Size,
+        draw_fn: F,
+    ) -> Geometry {
+        renderer.draw_cache(&self.cache, bounds, draw_fn)
+    }
 
-        for (i, bar) in self.bars.iter().enumerate() {
-            let x = 20.0 + i as f32 * (bar_width + spacing);
-            let mut y = self.height - 20.0;
+    fn build_chart<DB: DrawingBackend>(&self, _state: &Self::State, mut chart: ChartBuilder<DB>) {
+        let categories: Vec<&str> = self.data.iter().map(|c| c.label.as_str()).collect();
+        let category_count: f32 = self.data.len() as f32;
 
-            for segment in &bar.segments {
-                let height = (segment.height / self.max_value) * (self.height - 40.0);
-                let rect = Rectangle {
-                    x,
-                    y: y - height,
-                    width: bar_width,
-                    height,
-                };
+        let max_value: f32 = self
+            .data
+            .iter()
+            .map(|c| c.segments.iter().map(|(v, _)| *v).sum::<f32>())
+            .fold(0.0, f32::max)
+            .max(1.0);
 
-                frame.fill_rectangle(
-                    Point::new(rect.x, rect.y),
-                    Size::new(rect.width, rect.height),
-                    segment.color,
+        let mut chart = chart
+            .margin(10)
+            .x_label_area_size(40)
+            .set_left_and_bottom_label_area_size(35)
+            .build_cartesian_2d(0.0..category_count, 0.0..max_value)
+            .expect("Failed to build chart");
+
+        chart
+            .configure_mesh()
+            .disable_x_mesh()
+            .disable_y_axis()
+            .disable_y_mesh()
+            .x_labels(categories.len())
+            .x_label_offset(150)
+            .x_label_formatter(&|i| {
+                let idx = i.round() as usize;
+                categories.get(idx).cloned().unwrap_or("").to_string()
+            })
+            .x_label_style(
+                ("Orbitron", 14)
+                    .into_font()
+                    .color(&plotters::style::colors::WHITE),
+            )
+            .x_labels(10)
+            .draw()
+            .unwrap();
+
+        // Bar width and spacing
+        let bar_width = 0.7;
+
+        // Draw each bar segment using Rectangle
+        for (i, category) in self.data.iter().enumerate() {
+            let x_center = i as f32 + 0.15;
+            let x_left = x_center - bar_width / 2.0;
+            let x_right = x_center + bar_width / 2.0;
+
+            let mut y_offset: f32 = 0.0;
+
+            for (value, color) in &category.segments {
+                let rect = Rectangle::new(
+                    [(x_left, y_offset), (x_right, y_offset + *value)],
+                    color.filled(),
                 );
 
-                y -= height;
+                chart
+                    .draw_series(std::iter::once(rect))
+                    .expect("Failed to draw segment");
+
+                y_offset += *value;
             }
         }
-
-        vec![frame.into_geometry()]
     }
 }

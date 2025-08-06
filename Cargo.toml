@@ -86,6 +86,7 @@ lazy-regex = { version = "3.4.1" }         # Fast compile-once regex for validat
 # Other
 thiserror = "2.0.12"
 clap = { version = "4.5.42", features = ["derive"] }
+plotters-backend = "0.3.7"
 
 #================================================================================
 # Development & Testing

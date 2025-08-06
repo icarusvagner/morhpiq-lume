@@ -2971,6 +2971,7 @@ dependencies = [
  "native-tls",
  "palette",
  "plotters",
+ "plotters-backend",
  "plotters-iced",
  "pretty_assertions",
  "rodio",

@@ -10,6 +10,11 @@ use crate::gui::{
     views::{home::dashboard_view, InsideView},
 };
 
+pub struct MainLayout<'a> {
+    morphiq: Option<&'a Morphiq>,
+    inside_view: Option<&'a InsideView>,
+}
+
 pub fn main_layout<'a>(
     morphiq: &'a Morphiq,
     inside_view: &'a InsideView,

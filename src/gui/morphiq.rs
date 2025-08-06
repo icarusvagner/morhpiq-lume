@@ -15,6 +15,7 @@ use crate::gui::{
     views::{layouts::main_layout, login_view::login_view, InsideView, RunningView},
 };
 
+#[derive(Clone)]
 pub struct Morphiq {
     pub running_view: RunningView,
     pub theme: Theme,
