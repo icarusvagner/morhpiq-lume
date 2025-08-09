@@ -1,28 +1,38 @@
 use iced::{
     advanced::mouse,
-    alignment::{Horizontal, Vertical},
     widget::{
-        canvas::{self, Frame, Path},
+        canvas::{self, Frame, Geometry, Path},
         Canvas,
     },
-    Font, Length, Point, Rectangle, Renderer, Size, Theme,
+    Color, Font, Length, Point, Rectangle, Renderer, Size, Theme,
 };
 
-use crate::gui::{components::charts::bars::stacked::StackedBar, styles::style_constant::Colors};
+#[derive(Debug, Clone)]
+pub struct BarSegment {
+    pub value: f64,
+    pub color: Color,
+}
+
+#[derive(Debug, Clone)]
+pub struct StackedBar {
+    pub label: String,
+    pub segments: Vec<BarSegment>,
+}
+
+#[derive(Debug, Clone)]
+pub struct DonutData {
+    pub label: String,
+    pub segments: BarSegment,
+}
 
 pub struct VerticalStackedBarChart {
     data: Vec<StackedBar>,
     font: Font,
-    title: String,
 }
 
 impl VerticalStackedBarChart {
-    pub fn new(data: Vec<StackedBar>, font: Font, title: String) -> Self {
-        Self { data, font, title }
-    }
-
-    fn title(&self) -> String {
-        self.title.clone()
+    pub fn new(data: Vec<StackedBar>, font: Font) -> Self {
+        Self { data, font }
     }
 }
 
@@ -32,12 +42,13 @@ impl<Message, Theme> canvas::Program<Message, Theme> for VerticalStackedBarChart
     fn draw(
         &self,
         _state: &Self::State,
-        renderer: &Renderer,
+        _renderer: &Renderer,
         _theme: &Theme,
         bounds: Rectangle,
         _cursor: mouse::Cursor,
-    ) -> Vec<canvas::Geometry> {
-        let mut frame = Frame::new(renderer, bounds.size());
+    ) -> Vec<Geometry> {
+        let mut frame = Frame::new(_renderer, bounds.size());
+
         let padding = 20.0;
         let label_height = 30.0;
         let title_height = 40.0;
@@ -54,25 +65,13 @@ impl<Message, Theme> canvas::Program<Message, Theme> for VerticalStackedBarChart
             .fold(0.0, f64::max);
 
         let bar_count = self.data.len();
-        let bar_width = chart_area.width / (bar_count as f32 * 1.5);
+        let bar_width = chart_area.width / (bar_count as f32 * 1.5); // include spacing
         let bar_spacing = bar_width / 2.0;
 
-        // --- Draw title
-        // frame.fill_text(canvas::Text {
-        //     content: self.title(),
-        //     position: Point::new(bounds.width / 2.0, padding / 2.0),
-        //     horizontal_alignment: Horizontal::Right,
-        //     vertical_alignment: Vertical::Center,
-        //     font: self.font,
-        //     size: 28.into(),
-        //     color: Colors::Night.get(),
-        //     ..Default::default()
-        // });
-
-        // --- Draw bars
+        // --- Draw bars ---
         for (i, bar) in self.data.iter().enumerate() {
             let x = padding + i as f32 * (bar_width + bar_spacing);
-            let mut y = bounds.height - label_height - padding;
+            let mut y = bounds.height - label_height - padding; // Start drawing from bottom up
 
             for segment in &bar.segments {
                 let height_ratio = segment.value / max_total;
@@ -84,14 +83,15 @@ impl<Message, Theme> canvas::Program<Message, Theme> for VerticalStackedBarChart
                 y -= height;
             }
 
-            // --- Draw centered label
+            // --- Draw centered label ---
             frame.fill_text(canvas::Text {
                 content: bar.label.clone(),
                 position: Point::new(x + bar_width / 2.0, bounds.height - label_height + 5.0),
-                horizontal_alignment: Horizontal::Center,
-                vertical_alignment: Vertical::Top,
+                horizontal_alignment: iced::alignment::Horizontal::Center,
+                vertical_alignment: iced::alignment::Vertical::Top,
                 font: self.font,
-                color: Colors::Night.get(),
+                size: 18.into(),
+                color: Color::from_rgb8(100, 100, 100),
                 ..Default::default()
             });
         }
@@ -103,9 +103,8 @@ impl<Message, Theme> canvas::Program<Message, Theme> for VerticalStackedBarChart
 pub fn vertical_stacked_bar<Message>(
     data: Vec<StackedBar>,
     font: Font,
-    title: String,
 ) -> Canvas<VerticalStackedBarChart, Message, Theme, Renderer> {
-    iced::widget::canvas(VerticalStackedBarChart::new(data, font, title))
+    iced::widget::canvas(VerticalStackedBarChart::new(data, font))
         .width(Length::Fill)
-        .height(Length::Fill)
+        .height(Length::Fixed(400.0 * 2.0))
 }

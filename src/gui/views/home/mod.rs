@@ -23,3 +23,69 @@ pub fn dashboard_view<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
     let content = Column::new().push(content_1).push(content_2).spacing(15);
     container(content).padding(Padding::from(10.0))
 }
+
+#[derive(Debug, Clone)]
+pub struct DropdownState {
+    pub employee_tracker: Option<EmployeeTrackerChoice>,
+    pub attendance_tracker: Option<AttendanceTrackerChoice>,
+}
+
+#[derive(Debug, Clone)]
+pub struct AttendanceTrackerChoice {
+    pub choice: AttendanceTrackerDropdown,
+    pub expand: bool,
+}
+
+#[derive(Debug, Clone)]
+pub struct EmployeeTrackerChoice {
+    pub choice: EmployeeTrackerDropdown,
+    pub expand: bool,
+}
+
+#[derive(Debug, Clone)]
+pub enum DropdownChoice {
+    EmployeeTracker(EmployeeTrackerDropdown),
+    AttendanceTracker(AttendanceTrackerDropdown),
+}
+
+#[derive(Default, Clone, Debug)]
+pub enum EmployeeTrackerDropdown {
+    #[default]
+    ThisWeek,
+    LastWeek,
+    Month,
+    Year,
+}
+
+pub const EMPLOYEE_TRACKER_CHOICES: [EmployeeTrackerDropdown; 4] = [
+    EmployeeTrackerDropdown::ThisWeek,
+    EmployeeTrackerDropdown::LastWeek,
+    EmployeeTrackerDropdown::Month,
+    EmployeeTrackerDropdown::Year,
+];
+
+#[derive(Default, Clone, Debug)]
+pub enum AttendanceTrackerDropdown {
+    #[default]
+    Present,
+    Leave,
+    Absent,
+}
+
+pub const ATTENDANCE_CHOICES: [AttendanceTrackerDropdown; 3] = [
+    AttendanceTrackerDropdown::Present,
+    AttendanceTrackerDropdown::Leave,
+    AttendanceTrackerDropdown::Absent,
+];
+
+#[derive(Clone, Debug)]
+pub enum TrackerStateDD {
+    Dismiss,
+    Expand,
+}
+
+#[derive(Clone, Debug)]
+pub enum AttendanceDD {
+    Dismiss,
+    Expand,
+}

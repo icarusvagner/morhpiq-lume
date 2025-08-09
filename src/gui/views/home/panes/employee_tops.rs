@@ -5,7 +5,8 @@ use iced::{
 
 use crate::gui::{
     components::charts::bars::stacked::{
-        horizontal::horizontal_stacked_bar, BarSegment, StackedBar,
+        horizontal::horizontal_stacked_bar,
+        vertical::{BarSegment, StackedBar},
     },
     morphiq::Morphiq,
     styles::{
@@ -74,11 +75,7 @@ pub fn employee_tops(_morphiq: &Morphiq) -> Container<'_, Message> {
     let content = Column::new()
         .push(Text::new("Top 3 Employees by Performance").size(24))
         .push(horizontal_rule(2.0))
-        .push(horizontal_stacked_bar(
-            data,
-            OUTFIT_MEDIUM,
-            String::from("Top 3 Employees"),
-        ))
+        .push(horizontal_stacked_bar(data, OUTFIT_MEDIUM))
         .spacing(15);
 
     container(content)

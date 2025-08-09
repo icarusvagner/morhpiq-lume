@@ -29,7 +29,7 @@ pub fn sidebar_menu(_morphiq: &Morphiq) -> Container<'static, Message> {
         .spacing(15.0)
         .padding(10.0);
 
-    container(content).width(100.0)
+    container(content).width(80.0)
 }
 
 fn btns_menu(_morphiq: &Morphiq) -> Container<'static, Message> {

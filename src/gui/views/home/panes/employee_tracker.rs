@@ -5,11 +5,12 @@ use iced::{
     },
     Alignment, Background, Border, Color, Length, Padding, Shadow, Theme,
 };
+use iced_aw::DropDown;
 
 use crate::{
     gui::{
         components::{
-            charts::bars::stacked::{vertical::vertical_stacked_bar, BarSegment, StackedBar},
+            charts::bars::stacked::vertical::{vertical_stacked_bar, BarSegment, StackedBar},
             types::button::{button_style, ButtonType},
         },
         morphiq::Morphiq,
@@ -158,6 +159,8 @@ fn bar_chart_tracker<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
     ]
     .to_vec();
 
+    // let filters = DropDown::new(underlay, overlay, expanded);
+
     let header = Row::new()
         .push(text("Employee's Tracker").size(24))
         .push(horizontal_space())
@@ -177,11 +180,7 @@ fn bar_chart_tracker<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
 
     let content = Column::new()
         .push(header)
-        .push(vertical_stacked_bar(
-            data,
-            OUTFIT_MEDIUM,
-            String::from("Employee Tracker"),
-        ))
+        .push(vertical_stacked_bar(data, OUTFIT_MEDIUM))
         .spacing(15);
 
     container(content)

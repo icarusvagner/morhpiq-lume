@@ -51,7 +51,7 @@ directories = "6.0.0"                      # Platform-aware config/cache/data pa
 # GUI Framework & Theming
 iced = { version = "0.13.1", features = ["tokio", "svg", "advanced", "lazy", "image", "canvas"] } # Native GUI framework
 palette = "0.7.6"                          # Color palette library (for dynamic themes)
-iced_aw = "0.12.2"
+iced_aw = { version = "0.12.2", features = ["drop_down"] }
 
 # Charts and Data Visualization
 plotters = { version = "0.3.7", default-features = false, features = ["area_series", "line_series"] } # Plotting backend
