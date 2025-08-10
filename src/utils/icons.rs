@@ -2,6 +2,7 @@ use iced::{widget::Text, Theme};
 
 use crate::gui::styles::style_constant::ICONS;
 
+#[allow(unused)]
 pub enum Icon {
     Cancel,
     UserTimes,

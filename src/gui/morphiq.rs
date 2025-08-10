@@ -12,7 +12,7 @@ use crate::gui::{
         login::{LoginField, LoginMessage},
         message::{self, Error, Message},
     },
-    views::{home::{AttendanceTrackerChoice, DropdownChoice, DropdownState, EmployeeTrackerChoice, EmployeeTrackerDropdown}, layouts::main_layout, login_view::login_view, InsideView, RunningView},
+    views::{home::{AttendanceTrackerChoice, DropdownChoice, EmployeeTrackerChoice, EmployeeTrackerDropdown}, layouts::main_layout, login_view::login_view, InsideView, RunningView},
 };
 
 #[derive(Clone)]
@@ -23,7 +23,6 @@ pub struct Morphiq {
     pub login_field: LoginField,
     pub pass_secure: bool,
     pub pg_pool: Option<Arc<Db>>,
-    pub drop_state: Option<DropdownState>,
 }
 
 pub type Db = Pool<Postgres>;
@@ -45,7 +44,6 @@ impl Morphiq {
             login_field: LoginField::default(),
             pass_secure: true,
             pg_pool: None,
-            drop_state: None,
         }
     }
 
@@ -76,24 +74,6 @@ impl Morphiq {
                 }
             },
             Message::Loaded(_) => todo!(),
-            Message::DropDown(dropdown) => {
-                match dropdown {
-                    DropdownChoice::EmployeeTracker(employee_tracker) => {
-                        self.drop_state.employee_tracker = Some(EmployeeTrackerChoice {
-                            choice: employee_tracker,
-                            expand: true,
-                        });
-                        self.drop_state.attendance_tracker = None;
-                    },
-                    DropdownChoice::AttendanceTracker(attendance_tracker) => {
-                            self.drop_state.employee_tracker = None;
-                            self.drop_state.attendance_tracker = Some(AttendanceTrackerChoice {
-                                choice: attendance_tracker,
-                                expand: true,
-                            });
-                    }
-                }
-            }
         }
 
         Task::none()

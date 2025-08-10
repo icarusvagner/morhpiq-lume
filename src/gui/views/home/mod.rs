@@ -24,19 +24,13 @@ pub fn dashboard_view<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
     container(content).padding(Padding::from(10.0))
 }
 
-#[derive(Debug, Clone)]
-pub struct DropdownState {
-    pub employee_tracker: Option<EmployeeTrackerChoice>,
-    pub attendance_tracker: Option<AttendanceTrackerChoice>,
-}
-
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct AttendanceTrackerChoice {
     pub choice: AttendanceTrackerDropdown,
     pub expand: bool,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct EmployeeTrackerChoice {
     pub choice: EmployeeTrackerDropdown,
     pub expand: bool,

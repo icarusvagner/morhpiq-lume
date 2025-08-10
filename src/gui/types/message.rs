@@ -1,7 +1,7 @@
 use crate::gui::{
     morphiq::Db,
     types::login::LoginMessage,
-    views::{home::DropdownChoice, InsideView, RunningView},
+    views::{InsideView, RunningView},
 };
 
 #[derive(Clone, Debug)]
@@ -12,7 +12,6 @@ pub enum Message {
     ToggleShowPwd(bool),
     Logout,
     Loaded(Result<Db>),
-    DropDown(DropdownChoice),
 }
 
 pub type Result<T> = core::result::Result<T, Error>;
