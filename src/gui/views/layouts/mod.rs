@@ -1,6 +1,8 @@
 use iced::{
-    widget::{button, container, text, vertical_rule, Column, Container, Row, Scrollable},
-    Alignment, Length,
+    widget::{
+        button, container, scrollable, text, vertical_rule, Column, Container, Row, Scrollable,
+    },
+    Alignment, Element, Length,
 };
 
 use crate::gui::{
@@ -14,9 +16,21 @@ pub fn main_layout<'a>(
     morphiq: &'a Morphiq,
     inside_view: &'a InsideView,
 ) -> Container<'a, Message> {
+    let to_view_content: Element<Message> = Element::from(
+        Scrollable::new(to_view(morphiq, inside_view))
+            .direction(scrollable::Direction::Vertical(
+                scrollable::Scrollbar::new()
+                    .width(0.0)
+                    .margin(0.0)
+                    .scroller_width(4.0)
+                    .anchor(scrollable::Anchor::Start),
+            ))
+            .width(Length::Fill)
+            .height(Length::Fill),
+    );
     let view_layout = Column::new()
         .push(header_view(morphiq))
-        .push(Scrollable::new(to_view(morphiq, inside_view)));
+        .push(to_view_content);
 
     let content = Row::new()
         .push(sidebar_menu(morphiq))
