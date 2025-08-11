@@ -19,7 +19,9 @@ use crate::{
         morphiq::Morphiq,
         styles::{
             container::ContainerStyle,
-            style_constant::{Colors, OUTFIT_BOLD, OUTFIT_MEDIUM, RALEWAY_ITALIC, RALEWAY_REGULAR},
+            style_constant::{
+                Colors, OUTFIT_MEDIUM, OUTFIT_REGULAR, RALEWAY_ITALIC, RALEWAY_REGULAR,
+            },
         },
         types::message::Message,
         views::home::panes::display_status,
@@ -92,7 +94,7 @@ pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
                     .push(
                         Text::new("Genders")
                             .size(24)
-                            .font(OUTFIT_BOLD)
+                            .font(OUTFIT_REGULAR)
                             .align_x(Horizontal::Left)
                             .align_y(Vertical::Center),
                     )
@@ -171,7 +173,7 @@ pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
         .push(employee_component(
             "Descartin, Lance Phillip",
             "dev.castlebyte@gmail.com",
-            "Programmer",
+            "Fullstack Developver",
             1001,
             &Statuses::Onboarding,
         ))
@@ -182,8 +184,7 @@ pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
             1001,
             &Statuses::Leave,
         ))
-        .padding(15)
-        .spacing(20);
+        .spacing(15);
 
     let scrollable_content: Element<Message> = Element::from(
         Scrollable::new(col)
@@ -191,15 +192,53 @@ pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
                 scrollable::Scrollbar::new()
                     .width(0.0)
                     .margin(0.0)
-                    .scroller_width(1.0)
+                    .scroller_width(0.0)
                     .anchor(scrollable::Anchor::Start),
             ))
             .width(Length::Fill)
             .height(Length::Fill),
     );
 
-    let scroll_content =
-        Container::new(scrollable_content).style(ContainerStyle::Rounded.appearance());
+    let with_title = Column::new()
+        .push(
+            Text::new("Employee's Status")
+                .size(24)
+                .width(Length::Fill)
+                .align_x(Alignment::Start)
+                .align_y(Alignment::Center),
+        )
+        .push(
+            Row::new()
+                .push(Text::new("Fullname").size(24).width(Length::Fill))
+                .push(
+                    Text::new("Department")
+                        .size(24)
+                        .width(Length::Fill)
+                        .align_x(Horizontal::Center)
+                        .align_y(Vertical::Center),
+                )
+                .push(
+                    Text::new("ID No")
+                        .size(24)
+                        .width(Length::Fixed(200.0))
+                        .align_x(Horizontal::Center)
+                        .align_y(Vertical::Center),
+                )
+                .push(
+                    Text::new("Status")
+                        .size(24)
+                        .width(Length::Fixed(150.0))
+                        .align_x(Alignment::Center)
+                        .align_y(Alignment::Center),
+                )
+                .width(Length::Fill),
+        )
+        .push(horizontal_rule(2.0))
+        .push(scrollable_content)
+        .padding(20)
+        .spacing(10);
+
+    let scroll_content = Container::new(with_title).style(ContainerStyle::Rounded.appearance());
 
     let content = Row::new()
         .push(scroll_content)
@@ -232,19 +271,25 @@ fn employee_component<'a>(
                         .align_x(Horizontal::Center)
                         .align_y(Vertical::Center),
                 )
+                .width(Length::Fill)
                 .spacing(5),
         )
-        .push(horizontal_space())
+        .push(
+            Text::new(department)
+                .size(20)
+                .width(Length::Fill)
+                .align_x(Horizontal::Center)
+                .align_y(Vertical::Center),
+        )
         .push(
             Text::new(id_no)
                 .size(20)
-                .width(50)
-                .align_x(Horizontal::Right)
+                .width(Length::Fixed(200.0))
+                .align_x(Horizontal::Center)
                 .align_y(Vertical::Center),
         )
-        .push(horizontal_space())
         .push(display_status(status))
-        .spacing(15);
+        .spacing(10);
 
     Container::new(content).width(Length::Fill)
 }
@@ -261,7 +306,7 @@ impl GenderLabelDot {
         move |_t| container::Style {
             background: match self {
                 GenderLabelDot::Primary => Some(Background::Color(Colors::DarkPastelGreen.get())),
-                GenderLabelDot::Secondary => Some(Background::Color(Colors::Citrine.get())),
+                GenderLabelDot::Secondary => Some(Background::Color(Colors::Pumpkin.get())),
                 GenderLabelDot::Tertiary => Some(Background::Color(Colors::Silver.get())),
             },
             border: iced::Border {
