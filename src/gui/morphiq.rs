@@ -9,10 +9,10 @@ use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 
 use crate::gui::{
     types::{
-        login::{LoginField, LoginMessage},
+        login::{LoginMessage, LoginView},
         message::{self, Error, Message},
     },
-    views::{home::{AttendanceTrackerChoice, DropdownChoice, EmployeeTrackerChoice, EmployeeTrackerDropdown}, layouts::main_layout, login_view::login_view, InsideView, RunningView},
+    views::{ layouts::MainLayout, RunningView},
 };
 
 #[derive(Clone)]
@@ -20,7 +20,7 @@ pub struct Morphiq {
     pub running_view: RunningView,
     pub theme: Theme,
     pub id: Option<window::Id>,
-    pub login_field: LoginField,
+    pub login_view: LoginView,
     pub pass_secure: bool,
     pub pg_pool: Option<Arc<Db>>,
 }
@@ -41,7 +41,7 @@ impl Morphiq {
             running_view: RunningView::Login,
             theme: Theme::Light,
             id: None,
-            login_field: LoginField::default(),
+            login_view: LoginView::default(),
             pass_secure: true,
             pg_pool: None,
         }
@@ -56,21 +56,17 @@ impl Morphiq {
                 self.pass_secure = is_pwd;
             }
             Message::ChangeRunningPage(running_view) => {
+                eprintln!("{:?}", running_view);
                 self.running_view = running_view;
             }
             Message::ChangeHomeView(inside_view) => {
                 self.running_view = RunningView::Home(inside_view);
             }
-            Message::LoginMessage(login) => match login {
-                LoginMessage::InputFieldChange(username, password) => {
-                    self.login_field = LoginField { username, password }
-                }
-                LoginMessage::LoginSubmit => {
-                    if !self.login_field.username.is_empty()
-                        && !self.login_field.password.is_empty()
-                    {
-                        self.running_view = RunningView::Home(InsideView::Dashboard);
-                    }
+            Message::LoginView(message) => {
+                self.login_view.update(message.clone());
+
+                if let LoginMessage::LoginSubmit = message.clone() && !self.login_view.username.is_empty() && !self.login_view.password.is_empty(){
+                    self.running_view = RunningView::Home(crate::gui::views::InsideView::Dashboard);
                 }
             },
             Message::Loaded(_) => todo!(),
@@ -82,8 +78,8 @@ impl Morphiq {
     pub fn view<'a>(&'a self) -> Element<'a, Message> {
         let _window_id = self.id.unwrap_or_else(Id::unique);
         let content = match &self.running_view {
-            RunningView::Login => login_view(self),
-            RunningView::Home(inside_view) => main_layout(self, inside_view),
+            RunningView::Login => LoginView::view(&self.login_view, self),
+            RunningView::Home(inside_view) => MainLayout::view(self, inside_view),
         };
 
         container(content)

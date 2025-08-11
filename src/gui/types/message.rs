@@ -8,7 +8,7 @@ use crate::gui::{
 pub enum Message {
     ChangeRunningPage(RunningView),
     ChangeHomeView(InsideView),
-    LoginMessage(LoginMessage),
+    LoginView(LoginMessage),
     ToggleShowPwd(bool),
     Logout,
     Loaded(Result<Db>),

@@ -11,7 +11,7 @@ use crate::gui::{
     morphiq::Morphiq,
     styles::{
         container::ContainerStyle,
-        style_constant::{Colors, OUTFIT_MEDIUM},
+        style_constant::{Colors, OUTFIT_BOLD, OUTFIT_MEDIUM},
     },
     types::message::Message,
 };
