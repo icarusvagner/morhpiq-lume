@@ -1,6 +1,5 @@
-use std::borrow::Cow;
-
 use iced::{window, Font, Pixels, Settings, Size, Task};
+use std::borrow::Cow;
 
 use crate::gui::{
     morphiq::{Morphiq, FONT_FAMILY_NAME},
