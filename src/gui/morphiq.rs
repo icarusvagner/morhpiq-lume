@@ -5,7 +5,6 @@ use iced::{
     window::{self, Id},
     Element, Length, Task, Theme,
 };
-use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 
 use crate::gui::{
     types::{
@@ -22,10 +21,8 @@ pub struct Morphiq {
     pub id: Option<window::Id>,
     pub login_view: LoginView,
     pub pass_secure: bool,
-    pub pg_pool: Option<Arc<Db>>,
 }
 
-pub type Db = Pool<Postgres>;
 pub const ICON_FONT_FAMILY_NAME: &str = "Icons for Morphiq Lume";
 pub const FONT_FAMILY_NAME: &str = "Outfit";
 pub const SVG_FULLLOGO_BYTES: &[u8] = include_bytes!("../../assets/logos/icons/full/icon_full.svg");
@@ -43,7 +40,6 @@ impl Morphiq {
             id: None,
             login_view: LoginView::default(),
             pass_secure: true,
-            pg_pool: None,
         }
     }
 
@@ -69,7 +65,6 @@ impl Morphiq {
                     self.running_view = RunningView::Home(crate::gui::views::InsideView::Dashboard);
                 }
             },
-            Message::Loaded(_) => todo!(),
         }
 
         Task::none()
@@ -86,14 +81,5 @@ impl Morphiq {
             .width(Length::Fill)
             .height(Length::Fill)
             .into()
-    }
-}
-
-impl Morphiq {
-    async fn connect() -> message::Result<Arc<Db>> {
-        let url = std::env::var("SERVICE_DB_URL").map_err(|e| Error::FailedToLoadEnv(e.to_string()))?;
-
-        let pool = PgPoolOptions::new().max_connections(5).connect(&url).await.map_err(|e| Error::DatabaseConnectionError(e.to_string()))?;
-        Ok(Arc::new(pool))
     }
 }

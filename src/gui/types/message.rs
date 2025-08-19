@@ -1,5 +1,4 @@
 use crate::gui::{
-    morphiq::Db,
     types::login::LoginMessage,
     views::{InsideView, RunningView},
 };
@@ -11,7 +10,6 @@ pub enum Message {
     LoginView(LoginMessage),
     ToggleShowPwd(bool),
     Logout,
-    Loaded(Result<Db>),
 }
 
 pub type Result<T> = core::result::Result<T, Error>;

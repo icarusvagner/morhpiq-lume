@@ -31,7 +31,7 @@ pub fn header_view(_morphiq: &Morphiq) -> Container<'_, Message> {
                 Row::new()
                     .push(horizontal_space())
                     .push(
-                        Icon::UserPlus
+                        Icon::Calendar
                             .to_text()
                             .size(20)
                             .align_x(Alignment::Center)
@@ -60,7 +60,7 @@ pub fn header_view(_morphiq: &Morphiq) -> Container<'_, Message> {
                 Row::new()
                     .push(horizontal_space())
                     .push(
-                        Icon::Plus
+                        Icon::UserPlus
                             .to_text()
                             .size(20)
                             .align_x(Alignment::Center)

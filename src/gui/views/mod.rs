@@ -1,4 +1,5 @@
 pub mod dashboard_view;
+pub mod employees;
 pub mod home;
 pub mod layouts;
 pub mod login_view;

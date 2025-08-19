@@ -102,7 +102,7 @@ impl<Message> canvas::Program<Message, Theme> for DonutChart {
             frame.fill(&path, color);
         }
 
-        let inner_circle = canvas::Path::circle(center, radius - 6.0);
+        let inner_circle = canvas::Path::circle(center, radius - 15.0);
         frame.fill(&inner_circle, Color::WHITE);
         frame.fill_text(Text {
             content: format!("{} Total Genders", self.title().clone()),

@@ -81,9 +81,6 @@ base64 = { version = "0.22.1" }            # Encode/decode Base64 (for tokens, I
 # Visual Transitions / Interpolation
 splines = "5.0.0"                          # Smooth animations, easing, graph lines
 
-# Database (Optional future integration with local Postgres)
-sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "macros", "postgres", "uuid"] } # Async-safe DB client (PostgreSQL)
-
 # Regex Utilities
 lazy-regex = { version = "3.4.1" }         # Fast compile-once regex for validations
 

@@ -20,7 +20,7 @@ impl HorizontalStackedBarChart {
         Self {
             data,
             font,
-            bar_height: 24.0,
+            bar_height: 32.0,
             bar_spacing: 20.0,
         }
     }
