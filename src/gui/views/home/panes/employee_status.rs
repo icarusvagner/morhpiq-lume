@@ -29,7 +29,7 @@ use crate::{
     utils::icons::Icon,
 };
 
-pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
+pub fn employee_gender<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
     let genders_label = Column::new()
         .push(
             Row::new()
@@ -87,7 +87,7 @@ pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
         )
         .spacing(15);
 
-    let gender_count = Container::new(
+    Container::new(
         Column::new()
             .push(
                 Row::new()
@@ -125,8 +125,10 @@ pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
     )
     .width(Length::Fixed(500.0))
     .padding(15)
-    .style(ContainerStyle::Rounded.appearance());
+    .style(ContainerStyle::Rounded.appearance())
+}
 
+pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
     let col = Column::new()
         .push(employee_component(
             "Descartin, Lance Phillip",
@@ -242,7 +244,7 @@ pub fn employee_status<'a>(_morphiq: &Morphiq) -> Container<'a, Message> {
 
     let content = Row::new()
         .push(scroll_content)
-        .push(gender_count)
+        .push(employee_gender(_morphiq))
         .spacing(15);
 
     Container::new(content).height(Length::Fixed(400.0))

@@ -21,6 +21,7 @@ pub fn dashboard_view<'a>(_morphiq: &'a Morphiq) -> Container<'a, Message> {
         .spacing(15);
     let content_2 = Row::new().push(employee_status(_morphiq)).spacing(15);
     let content = Column::new().push(content_1).push(content_2).spacing(15);
+
     container(content).padding(Padding::from(10.0))
 }
 
