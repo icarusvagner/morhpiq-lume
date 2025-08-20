@@ -1,5 +1,205 @@
 use iced::Color;
 use plotters::style::RGBColor;
+use serde::{Deserialize, Serialize};
+
+use crate::gui::styles::{
+    style_constant::{OUTFIT_BOLD, OUTFIT_REGULAR, RALEWAY_BOLD, RALEWAY_REGULAR},
+    types::palette_extension::PaletteExtension,
+};
+
+use super::color_remote::{deserialize_color, serialize_color};
+
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Copy)]
+pub struct Palette {
+    /// Base colors of the GUI for either background, hovered component, active tab
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub base_100: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub base_200: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub base_300: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    /// Base content color for GUI e.g text color or content inside the component
+    pub base_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub primary: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub primary_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub secondary: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub secondary_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub accent: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub accent_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub neutral: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub neutral_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub info: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub info_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub success: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub success_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub warning: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub warning_content: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub error: Color,
+    #[serde(
+        deserialize_with = "deserialize_color",
+        serialize_with = "serialize_color"
+    )]
+    pub error_content: Color,
+}
+
+impl Palette {
+    pub fn generate_buttons_color(self) -> Color {
+        let primary = self.primary;
+        let is_nightly = primary.r + primary.g + primary.b <= 1.5;
+
+        if is_nightly {
+            Color {
+                r: f32::min(primary.r + 0.15, 1.0),
+                g: f32::min(primary.g + 0.15, 1.0),
+                b: f32::min(primary.b + 0.15, 1.0),
+                a: 1.0,
+            }
+        } else {
+            Color {
+                r: f32::max(primary.r + 0.15, 0.0),
+                g: f32::max(primary.g + 0.15, 0.0),
+                b: f32::max(primary.b + 0.15, 0.0),
+                a: 1.0,
+            }
+        }
+    }
+
+    pub fn generate_containers_color(self) -> Color {
+        let primary = self.base_100;
+        let is_nightly = primary.r + primary.g + primary.b <= 1.5;
+
+        if is_nightly {
+            Color {
+                r: f32::min(primary.r + 0.15, 1.0),
+                g: f32::min(primary.g + 0.15, 1.0),
+                b: f32::min(primary.b + 0.15, 1.0),
+                a: 1.0,
+            }
+        } else {
+            Color {
+                r: f32::max(primary.r + 0.15, 0.0),
+                g: f32::max(primary.g + 0.15, 0.0),
+                b: f32::max(primary.b + 0.15, 0.0),
+                a: 1.0,
+            }
+        }
+    }
+
+    pub fn generate_paletter_extension(self) -> PaletteExtension {
+        let primary = self.primary;
+        let text_headers = self.primary_content;
+        let text_body = self.base_content;
+
+        let is_text_body_dark = text_body.r + text_body.b + text_body.g <= 1.5;
+        let is_text_header_dark = text_headers.r + text_headers.b + text_headers.g <= 1.5;
+
+        let is_nightly = primary.r + primary.g + primary.b <= 1.5;
+        let font = if is_text_body_dark {
+            OUTFIT_BOLD
+        } else {
+            OUTFIT_REGULAR
+        };
+
+        let font_headers = if is_text_header_dark {
+            RALEWAY_BOLD
+        } else {
+            RALEWAY_REGULAR
+        };
+
+        let alpha_round_borders = if is_nightly { 0.15 } else { 0.75 };
+        let alpha_round_containers = if is_nightly { 0.3 } else { 0.6 };
+        let buttons_color = self.generate_buttons_color();
+        let containers_color = self.generate_containers_color();
+
+        PaletteExtension {
+            is_nightly,
+            font,
+            font_headers,
+            radius_selectors: 0.25,
+            radius_fields: 0.25,
+            radius_boxes: 0.25,
+            size_selectors: 0.25,
+            size_fields: 0.25,
+            alpha_round_borders,
+            alpha_round_containers,
+            buttons_color,
+            containers_color,
+        }
+    }
+}
 
 pub fn to_rgb_color(color: Color) -> RGBColor {
     #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]

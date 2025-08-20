@@ -1,5 +1,5 @@
-pub mod vertical;
 pub mod horizontal;
+pub mod vertical;
 
 #[derive(Debug, Clone)]
 pub struct BarSegment {
