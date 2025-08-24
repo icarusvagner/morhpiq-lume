@@ -30,6 +30,8 @@ pub enum Message {
     ChangeVolume(u8),
     /// Save the configuration of the app and quit
     Quit,
+    /// Start with some dashboard data
+    Start,
     /// Recieves login view messages
     LoginViewMessage(LoginViewMessage),
     /// Change the current running view

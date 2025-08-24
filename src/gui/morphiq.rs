@@ -92,7 +92,13 @@ impl Morphiq {
             Message::ChangeMainView(main_view) => {
             self.running_view = RunningView::MainView(main_view);
         }
+        Message::Start => return self.start(),
         }
+        Task::none()
+    }
+
+    // Performing some free fetch data for the dashboard and start some db connections
+    fn start(&mut self) -> Task<Message> {
         Task::none()
     }
 

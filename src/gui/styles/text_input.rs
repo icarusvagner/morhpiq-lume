@@ -70,19 +70,27 @@ impl TextInputType {
     }
 
     #[allow(clippy::unused_self)]
+    fn lighted_color(&self, color: Color) -> Color {
+        Color {
+            a: color.a - 0.20,
+            ..color
+        }
+    }
+
+    #[allow(clippy::unused_self)]
     fn placeholder_color(&self, style: &StyleType) -> Color {
         let colors = style.get_palette();
 
         match self {
-            TextInputType::Primary => colors.primary,
-            TextInputType::Secondary => colors.secondary,
-            TextInputType::Accent => colors.accent,
-            TextInputType::Neutral => colors.neutral,
-            TextInputType::Info => colors.info,
-            TextInputType::Success => colors.success,
-            TextInputType::Warning => colors.warning,
-            TextInputType::Error => colors.error,
-            _ => colors.base_content,
+            TextInputType::Primary => self.lighted_color(colors.primary),
+            TextInputType::Secondary => self.lighted_color(colors.secondary),
+            TextInputType::Accent => self.lighted_color(colors.accent),
+            TextInputType::Neutral => self.lighted_color(colors.neutral),
+            TextInputType::Info => self.lighted_color(colors.info),
+            TextInputType::Success => self.lighted_color(colors.success),
+            TextInputType::Warning => self.lighted_color(colors.warning),
+            TextInputType::Error => self.lighted_color(colors.error),
+            _ => self.lighted_color(colors.base_content),
         }
     }
 

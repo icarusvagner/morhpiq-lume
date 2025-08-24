@@ -10,9 +10,12 @@ use crate::gui::styles::{style_constant::BORDER_WIDTH, types::style_type::StyleT
 #[derive(Default, Debug, Clone, Copy, PartialEq)]
 pub enum ContainerType {
     Base100,
+    Base100NoBorder,
     Base200,
+    Base200NoBorder,
     #[default]
     Base300,
+    Base300NoBorder,
     Primary,
     PrimaryNoBorder,
     Secondary,
@@ -72,9 +75,15 @@ impl ContainerType {
                 ContainerType::Error | ContainerType::ErrorNoBorder => {
                     Background::Color(colors.error)
                 }
-                ContainerType::Base100 => Background::Color(colors.base_100),
-                ContainerType::Base200 => Background::Color(colors.base_200),
-                ContainerType::Base300 => Background::Color(colors.base_300),
+                ContainerType::Base100 | ContainerType::Base100NoBorder => {
+                    Background::Color(colors.base_100)
+                }
+                ContainerType::Base200 | ContainerType::Base200NoBorder => {
+                    Background::Color(colors.base_200)
+                }
+                ContainerType::Base300 | ContainerType::Base300NoBorder => {
+                    Background::Color(colors.base_300)
+                }
                 _ => Background::Color(Color::TRANSPARENT),
             }),
             border: match self {
@@ -88,7 +97,10 @@ impl ContainerType {
                 | ContainerType::InfoNoBorder
                 | ContainerType::SuccessNoBorder
                 | ContainerType::WarningNoBorder
-                | ContainerType::ErrorNoBorder => Border::default(),
+                | ContainerType::ErrorNoBorder
+                | ContainerType::Base100NoBorder
+                | ContainerType::Base200NoBorder
+                | ContainerType::Base300NoBorder => Border::default(),
                 _ => Border {
                     color: match self {
                         ContainerType::Success => colors.success,

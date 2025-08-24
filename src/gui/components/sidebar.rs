@@ -1,6 +1,9 @@
 use iced::{
     alignment::{Horizontal, Vertical},
-    widget::{button, container, horizontal_rule, svg::Handle, text, tooltip, Column, Row, Svg},
+    widget::{
+        button, container, horizontal_rule, svg::Handle, text, tooltip, vertical_space, Column,
+        Row, Svg,
+    },
     Alignment, Element, Length, Padding,
 };
 
@@ -8,7 +11,7 @@ use crate::{
     gui::{
         morphiq::SVG_EMBLEMLOGO_BYTES,
         styles::{
-            button::ButtonType, container::ContainerType, text::TextType,
+            button::ButtonType, container::ContainerType, rule::RuleType, text::TextType,
             types::style_type::StyleType,
         },
         types::message::Message,
@@ -79,6 +82,29 @@ impl SidebarMenu {
 
         let content = Column::new()
             .push(tooltip_btns_menu)
+            .push(vertical_space())
+            .push(horizontal_rule(2.0).class(RuleType::Base200))
+            .push(
+                tooltip(
+                    button(
+                        Icon::Power
+                            .to_text()
+                            .size(32)
+                            .align_x(Horizontal::Center)
+                            .align_y(Vertical::Center)
+                            .class(TextType::Base100),
+                    )
+                    .on_press(Message::Quit)
+                    .class(ButtonType::Ghost),
+                    container(text("Quit").size(18).class(TextType::Base100))
+                        .padding(Padding::from([2.5, 5.0]))
+                        .align_x(Horizontal::Center)
+                        .align_y(Vertical::Center)
+                        .class(ContainerType::Ghost),
+                    tooltip::Position::Right,
+                )
+                .class(ContainerType::Neutral),
+            )
             .spacing(15)
             .width(Length::Fill)
             .padding(15)

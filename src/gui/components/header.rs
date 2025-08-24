@@ -12,7 +12,8 @@ use crate::{
     gui::{
         styles::{
             button::ButtonType, container::ContainerType, context_menu::ContextMenuType,
-            text::TextType, text_input::TextInputType, types::style_type::StyleType,
+            rule::RuleType, text::TextType, text_input::TextInputType,
+            types::style_type::StyleType,
         },
         types::message::Message,
         views::{loginview::LoginViewMessage, mainview::MainViews},
@@ -47,10 +48,10 @@ impl HeaderMenu {
                     .width(Length::Fill),
             )
             .push(Icon::Search.to_text().size(20).class(TextType::Neutral))
-            .push(vertical_rule(2.0))
             .align_y(Alignment::Center)
             .width(200.0)
-            .spacing(5);
+            .padding(10)
+            .spacing(8);
 
         let profile_choice = Container::new(
             Button::new(
@@ -160,7 +161,7 @@ impl HeaderMenu {
                 })
                 .class(ContextMenuType::Ghost),
             )
-            .push(vertical_rule(2.0))
+            .push(vertical_rule(2.0).class(RuleType::Base300))
             .push(
                 button(
                     Icon::MessageSquareMore
@@ -180,15 +181,17 @@ impl HeaderMenu {
                 Icon::Morphiq
                     .to_text()
                     .size(28)
-                    .width(80.0)
+                    .width(74.5)
                     .align_x(Alignment::Center)
                     .align_y(Alignment::Center)
                     .class(TextType::Neutral),
             )
+            .push(vertical_rule(2.0).class(RuleType::Base300))
             .push(search_input)
+            .push(vertical_rule(2.0).class(RuleType::Base300))
             .push(horizontal_space())
             .push(utilities)
-            .align_y(Alignment::Center)
+            .align_y(Vertical::Center)
             .width(Length::Fill)
             .height(Length::Fill);
 
@@ -196,7 +199,7 @@ impl HeaderMenu {
             .padding(5.0)
             .height(Length::Fixed(65.0))
             .width(Length::Fill)
-            .class(ContainerType::Base100)
+            .class(ContainerType::Base100NoBorder)
             .into()
     }
 }

@@ -40,10 +40,7 @@ impl MainLayout {
             ),
         );
 
-        let content = Row::new()
-            .push(SidebarMenu::view())
-            .push(body_view_content)
-            .spacing(10);
+        let content = Row::new().push(SidebarMenu::view()).push(body_view_content);
 
         let body_content = Column::new().push(HeaderMenu::view()).push(content);
 
@@ -54,7 +51,7 @@ impl MainLayout {
     }
 
     fn to_view<'a>(view_content: &MainViews) -> Element<'a, Message, StyleType> {
-        match view_content {
+        container(match view_content {
             MainViews::Dashboard => DashboardView::view(),
             MainViews::Employee => EmployeeView::view(),
             MainViews::Attendance => AttendanceView::view(),
@@ -63,6 +60,8 @@ impl MainLayout {
             MainViews::Documents => DocumentsView::view(),
             MainViews::Settings => SettingsView::view(),
             MainViews::EditProfile => EditProfileView::view(),
-        }
+        })
+        .padding(12)
+        .into()
     }
 }

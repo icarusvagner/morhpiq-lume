@@ -20,6 +20,7 @@ use crate::{
             RALEWAY_MEDIUM_ITALIC_BYTES, RALEWAY_REGULAR_BYTES, RALEWAY_SEMI_BOLD_BYTES,
             RALEWAY_SEMI_BOLD_ITALIC_BYTES, RALEWAY_THIN_BYTES, RALEWAY_THIN_ITALIC_BYTES,
         },
+        types::message::Message,
     },
 };
 
@@ -35,6 +36,9 @@ const WINDOW_ICON: &[u8] = include_bytes!("../assets/logos/icons/raw/icon.png");
 
 pub fn main() -> iced::Result {
     let configs = CONFIGS.clone();
+    let boot_tash_chain = window::get_latest()
+        .map(Message::StartApp)
+        .chain(Task::done(Message::Start));
 
     application(MORPHIQ_TITLECASE, Morphiq::update, Morphiq::view)
         .settings(Settings {
@@ -89,5 +93,5 @@ pub fn main() -> iced::Result {
             ..Default::default()
         })
         .theme(Morphiq::theme)
-        .run_with(move || (Morphiq::new(configs), Task::none()))
+        .run_with(move || (Morphiq::new(configs), boot_tash_chain))
 }

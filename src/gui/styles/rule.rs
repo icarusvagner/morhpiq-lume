@@ -8,8 +8,17 @@ use crate::gui::styles::types::style_type::StyleType;
 #[derive(Default)]
 pub enum RuleType {
     #[default]
-    Straight,
-    Dashed,
+    Base100,
+    Base200,
+    Base300,
+    Primary,
+    Secondary,
+    Accent,
+    Neutral,
+    Info,
+    Success,
+    Warning,
+    Error,
 }
 
 impl RuleType {
@@ -17,11 +26,20 @@ impl RuleType {
         let colors = style.get_palette();
 
         Style {
-            color: colors.base_content,
-            width: match self {
-                RuleType::Straight => 1,
-                RuleType::Dashed => 3,
+            color: match self {
+                RuleType::Base100 => colors.base_100,
+                RuleType::Base200 => colors.base_200,
+                RuleType::Base300 => colors.base_300,
+                RuleType::Primary => colors.primary,
+                RuleType::Secondary => colors.secondary,
+                RuleType::Accent => colors.accent,
+                RuleType::Neutral => colors.neutral,
+                RuleType::Info => colors.info,
+                RuleType::Success => colors.success,
+                RuleType::Warning => colors.warning,
+                RuleType::Error => colors.error,
             },
+            width: 1,
             radius: 0.0.into(),
             fill_mode: FillMode::Full,
         }
